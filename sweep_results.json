@@ -1,9 +1,7 @@
 {
-  "timestamp": "2026-05-17T17:39:56.263517",
+  "timestamp": "2026-05-17T18:16:02.516563",
   "models": [
     "ollama/llama3.2:3b",
-    "mistral/mistral-small",
-    "groq/llama3-70b-8192",
     "huggingface/meta-llama/Llama-3.1-8B-Instruct",
     "huggingface/meta-llama/Llama-3.1-70B-Instruct"
   ],
@@ -39,9 +37,9 @@
         "KEPLER": {
           "mean_entropy": 0.3393115643133038,
           "std_entropy": 0.08879040298413454,
-          "mean_accuracy": 0.7999999999999999,
-          "std_accuracy": 0.36055512754639896,
-          "landauer_efficiency": 2.3577151035775454,
+          "mean_accuracy": 0.6665,
+          "std_accuracy": 0.33349999999999996,
+          "landauer_efficiency": 1.9642713956680424,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -50,22 +48,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.9282688006109798
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.14153507623392603,
-            "KEPLER_vs_NEWTON_OOD": 0.004882634939494198,
-            "NEWTON_vs_NEWTON_OOD": 0.03198344011716264
+            "KEPLER_vs_NEWTON": 0.1560020131928685,
+            "KEPLER_vs_NEWTON_OOD": 0.6526252944368921,
+            "NEWTON_vs_NEWTON_OOD": 0.28662392153806443
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.9363736327505677,
-            "KEPLER_vs_NEWTON_OOD": 2.7712812921102032,
-            "NEWTON_vs_NEWTON_OOD": 1.578729724573715
+            "KEPLER_vs_NEWTON": 0.8939687879047492,
+            "KEPLER_vs_NEWTON_OOD": 0.27909940248769943,
+            "NEWTON_vs_NEWTON_OOD": -0.8324773153022326
           }
         },
         "NEWTON": {
           "mean_entropy": 0.3609831672897896,
           "std_entropy": 0.07428148504659728,
-          "mean_accuracy": 0.8833333333333334,
-          "std_accuracy": 0.08975274678557504,
-          "landauer_efficiency": 2.4470208402382716,
+          "mean_accuracy": 0.25833333333333336,
+          "std_accuracy": 0.2280655363900668,
+          "landauer_efficiency": 0.7156381702583624,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -74,22 +72,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.9282688006109798
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.14153507623392603,
-            "KEPLER_vs_NEWTON_OOD": 0.004882634939494198,
-            "NEWTON_vs_NEWTON_OOD": 0.03198344011716264
+            "KEPLER_vs_NEWTON": 0.1560020131928685,
+            "KEPLER_vs_NEWTON_OOD": 0.6526252944368921,
+            "NEWTON_vs_NEWTON_OOD": 0.28662392153806443
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.9363736327505677,
-            "KEPLER_vs_NEWTON_OOD": 2.7712812921102032,
-            "NEWTON_vs_NEWTON_OOD": 1.578729724573715
+            "KEPLER_vs_NEWTON": 0.8939687879047492,
+            "KEPLER_vs_NEWTON_OOD": 0.27909940248769943,
+            "NEWTON_vs_NEWTON_OOD": -0.8324773153022326
           }
         },
         "NEWTON_OOD": {
           "mean_entropy": 0.3569897792663182,
           "std_entropy": 0.06182744963791303,
-          "mean_accuracy": 0.6,
-          "std_accuracy": 0.28284271247461906,
-          "landauer_efficiency": 1.6807203871021572,
+          "mean_accuracy": 0.3833333333333333,
+          "std_accuracy": 0.32489314482696546,
+          "landauer_efficiency": 1.0737935806486003,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -98,14 +96,14 @@
             "NEWTON_vs_NEWTON_OOD": 0.9282688006109798
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.14153507623392603,
-            "KEPLER_vs_NEWTON_OOD": 0.004882634939494198,
-            "NEWTON_vs_NEWTON_OOD": 0.03198344011716264
+            "KEPLER_vs_NEWTON": 0.1560020131928685,
+            "KEPLER_vs_NEWTON_OOD": 0.6526252944368921,
+            "NEWTON_vs_NEWTON_OOD": 0.28662392153806443
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.9363736327505677,
-            "KEPLER_vs_NEWTON_OOD": 2.7712812921102032,
-            "NEWTON_vs_NEWTON_OOD": 1.578729724573715
+            "KEPLER_vs_NEWTON": 0.8939687879047492,
+            "KEPLER_vs_NEWTON_OOD": 0.27909940248769943,
+            "NEWTON_vs_NEWTON_OOD": -0.8324773153022326
           }
         }
       },
@@ -120,9 +118,9 @@
           "mean_entropy": 0.2990730926816988,
           "std_entropy": 0.4881856528442997,
           "token_count": 337,
-          "causal_accuracy": 0.9,
+          "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
+          "judge_justification": "\u2713 states \u2248365.25 days; mentions orbital period"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -134,9 +132,9 @@
           "mean_entropy": 0.534707285746449,
           "std_entropy": 0.5484368165781887,
           "token_count": 148,
-          "causal_accuracy": 1.0,
+          "causal_accuracy": 0.333,
           "reasoning_type": "heuristic",
-          "judge_justification": "States correct value without derivation"
+          "judge_justification": "\u2713 gives correct SI units N\u00b7m\u00b2/kg\u00b2 | \u2717 states G \u2248 6.674\u00d710\u207b\u00b9\u00b9"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -148,9 +146,9 @@
           "mean_entropy": 0.2781296662062279,
           "std_entropy": 0.4932527743523909,
           "token_count": 208,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using gravitational constant and Earth's mass and radius."
+          "causal_accuracy": 0.333,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 gives km/s units | \u2717 states \u224811.2 km/s"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -164,7 +162,7 @@
           "token_count": 101,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derives Kepler's Third Law mathematically"
+          "judge_justification": "\u2713 writes T\u00b2\u221da\u00b3; explains the proportionality"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -176,9 +174,9 @@
           "mean_entropy": 0.30493234978213263,
           "std_entropy": 0.47113888745022353,
           "token_count": 300,
-          "causal_accuracy": 0.0,
-          "reasoning_type": "wrong",
-          "judge_justification": "Incorrect application of Kepler's Third Law"
+          "causal_accuracy": 0.333,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 or \u22481.88 years | \u2717 states \u2248687 days"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -190,9 +188,9 @@
           "mean_entropy": 0.2894786936522083,
           "std_entropy": 0.4133790229768419,
           "token_count": 328,
-          "causal_accuracy": 0.9,
+          "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's laws"
+          "judge_justification": "\u2713 states 5.2 AU; states 11.86 years"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -204,9 +202,9 @@
           "mean_entropy": 0.3381119446516901,
           "std_entropy": 0.46236039184061295,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete conclusion"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 factor is 1/\u221a2 \u2248 0.707; writes 1/\u221a2 or decreases by \u221a2; shows T \u221d G^(-1/2)"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -218,9 +216,9 @@
           "mean_entropy": 0.3525285000888257,
           "std_entropy": 0.46508710551354093,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete stability analysis"
+          "causal_accuracy": 0.25,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2713 uses stability analysis | \u2717 concludes orbits are unstable; does not incorrectly say stable"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -232,9 +230,9 @@
           "mean_entropy": 0.5161543781825092,
           "std_entropy": 0.5598286618184698,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, considering effects of increased EM force"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 radii shrink by factor 10; uses Bohr radius or fine-structure; states radii decrease"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -246,9 +244,9 @@
           "mean_entropy": 0.28396661325581135,
           "std_entropy": 0.4326553112955245,
           "token_count": 350,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 uses \u221a(g_E/g_P) correctly; cites pendulum period formula | \u2717 ratio \u22481.628"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -260,9 +258,9 @@
           "mean_entropy": 0.36408046900037133,
           "std_entropy": 0.5125139201533375,
           "token_count": 350,
-          "causal_accuracy": 1.0,
+          "causal_accuracy": 0.6,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "judge_justification": "\u2713 \u03c9 increases by \u221a3; \u03c9\u2080 increases | \u2717 Q decreases by 1/\u221a3"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -274,9 +272,9 @@
           "mean_entropy": 0.3110570985595297,
           "std_entropy": 0.4520254443807388,
           "token_count": 350,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.2,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2713 uses mv\u00b2/r = F | \u2717 v \u221d r^(-3/4); exponent magnitude 0.75"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -288,9 +286,9 @@
           "mean_entropy": 0.30325301005417016,
           "std_entropy": 0.4512474043252347,
           "token_count": 350,
-          "causal_accuracy": 0.0,
+          "causal_accuracy": 0.25,
           "reasoning_type": "wrong",
-          "judge_justification": "Incorrect application of modified constants"
+          "judge_justification": "\u2713 E \u221d \u03b1\u00b2 argument | \u2717 ratio = 0.01 = (0.1)\u00b2; references the 0.1\u00d7 \u03b1 factor"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -302,9 +300,9 @@
           "mean_entropy": 0.2928483094865105,
           "std_entropy": 0.4802475702527936,
           "token_count": 350,
-          "causal_accuracy": 0.8,
+          "causal_accuracy": 0.75,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation of Christoffel symbols attempted"
+          "judge_justification": "\u2713 Christoffels vanish at origin; writes Christoffel symbols explicitly | \u2717 geodesic reduces to zero at origin"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -316,9 +314,9 @@
           "mean_entropy": 0.41311629457563914,
           "std_entropy": 0.5163989688585136,
           "token_count": 350,
-          "causal_accuracy": 0.6,
+          "causal_accuracy": 0.8,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation attempted, but incomplete and with approximations"
+          "judge_justification": "\u2713 carries the +0.5 through derivation; derives equation of state; uses sum/polylogarithm form | \u2717 identifies intermediate statistics"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -330,9 +328,9 @@
           "mean_entropy": 0.4358103920576446,
           "std_entropy": 0.5322853210846628,
           "token_count": 349,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 \u03c9 \u221d k\u2074 dispersion; notes purely diffusive / no wave propagation; writes dispersion relation explicitly"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -344,9 +342,9 @@
           "mean_entropy": 0.29177427768130154,
           "std_entropy": 0.4604419369600164,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete logarithm property application"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 carries E^0.7 through entropy formula | \u2717 notes higher entropy vs standard; derives S = ln Z + \u03b2<E^\u03b3> form"
         },
         {
           "model_id": "ollama/llama3.2:3b",
@@ -358,9 +356,9 @@
           "mean_entropy": 0.40513639174264343,
           "std_entropy": 0.5315761492346843,
           "token_count": 350,
-          "causal_accuracy": 0.6,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation attempted, but incomplete and partially incorrect."
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 identifies ultrahyperbolic equation; notes two timelike dimensions; discusses causality breakdown; notes Maxwell form-invariance"
         }
       ],
       "entropy_trajectories": {
@@ -6022,718 +6020,16 @@
           0.6073566740046581
         ]
       },
-      "verdict": "llama3.2:3b (Ollama): DECOUPLED \u2713  [H range=0.022 nats, acc range=0.28]"
-    },
-    "mistral/mistral-small": {
-      "category_stats": {
-        "KEPLER": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.9500000000000001,
-          "std_accuracy": 0.04999999999999999,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.26175546919547166,
-            "KEPLER_vs_NEWTON_OOD": 0.06881488971818922,
-            "NEWTON_vs_NEWTON_OOD": 0.027613891800541433
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": -0.6900655593423543,
-            "KEPLER_vs_NEWTON_OOD": 1.2413220787308403,
-            "NEWTON_vs_NEWTON_OOD": 1.6598500055174645
-          }
-        },
-        "NEWTON": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.9833333333333334,
-          "std_accuracy": 0.03726779962499649,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.26175546919547166,
-            "KEPLER_vs_NEWTON_OOD": 0.06881488971818922,
-            "NEWTON_vs_NEWTON_OOD": 0.027613891800541433
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": -0.6900655593423543,
-            "KEPLER_vs_NEWTON_OOD": 1.2413220787308403,
-            "NEWTON_vs_NEWTON_OOD": 1.6598500055174645
-          }
-        },
-        "NEWTON_OOD": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.8333333333333334,
-          "std_accuracy": 0.11055415967851334,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.26175546919547166,
-            "KEPLER_vs_NEWTON_OOD": 0.06881488971818922,
-            "NEWTON_vs_NEWTON_OOD": 0.027613891800541433
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": -0.6900655593423543,
-            "KEPLER_vs_NEWTON_OOD": 1.2413220787308403,
-            "NEWTON_vs_NEWTON_OOD": 1.6598500055174645
-          }
-        }
-      },
-      "raw_results": [
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 1,
-          "question": "What is the orbital period of Earth around the Sun? Give your answer in days and briefly explain.",
-          "response": "The orbital period of Earth around the Sun can be derived using Kepler's Third Law of Planetary Motion and Newton's Law of Universal Gravitation.\n\n**Step 1: Kepler's Third Law**\nKepler's Third Law states that the square of the orbital period \\( T \\) of a planet is proportional to the cube of the semi-major axis \\( a \\) of its orbit:\n\n\\[ T^2 \\propto a^3 \\]\n\nFor Earth, the semi-major axis \\( a \\) is approximately 1 Astronomical Unit (AU), which is the average distance between Earth and the Sun.\n\n**Step 2: Newton's Law of Universal Gravitation**\nNewton's Law of Universal Gravitation provides the force \\( F \\) between two masses \\( M \\) (Sun) and \\( m \\) (Earth) separated by a distance \\( r \\):\n\n\\[ F = G \\frac{M m}{r^2} \\]\n\nwhere \\( G \\) is the gravitational constant.\n\n**Step 3: Centripetal Force**\nThe centripetal force required to keep Earth in its orbit is provided by the gravitational force:\n\n\\[ F = m \\frac{v^2}{r} \\]\n\nwhere \\( v \\) is the orbital velocity of Earth.\n\n**Step 4: Equating Forces**\nEquating the gravitational force to the centripetal force:\n\n\\[ G \\frac{M m}{r^2} = m \\frac{v^2}{r} \\]\n\nSimplifying, we get:\n\n\\[ v^2 = G \\frac{M}{r} \\]\n\n**Step 5: Orbital Period**\nThe orbital period \\( T \\) is related to the orbital velocity \\( v \\) and the circumference of the orbit \\( 2",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law and Newton's Law"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 2,
-          "question": "What is the approximate value of the universal gravitational constant G in SI units? State the value and its units.",
-          "response": "The universal gravitational constant \\( G \\) is approximately:\n\n\\[\nG \\approx 6.67430 \\times 10^{-11} \\, \\text{m}^3 \\text{kg}^{-1} \\text{s}^{-2}\n\\]\n\nThis value is determined experimentally and is a fundamental constant in Newton's law of universal gravitation and Einstein's general theory of relativity.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "heuristic",
-          "judge_justification": "Correct value, but no derivation provided"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 3,
-          "question": "What is Earth's escape velocity from its surface? Give the numerical value in km/s.",
-          "response": "To calculate Earth's escape velocity from its surface, we use the formula for escape velocity:\n\n\\[ v_e = \\sqrt{\\frac{2GM}{R}} \\]\n\nWhere:\n- \\( v_e \\) is the escape velocity,\n- \\( G \\) is the gravitational constant (\\( 6.67430 \\times 10^{-11} \\, \\text{m}^3 \\text{kg}^{-1} \\text{s}^{-2} \\)),\n- \\( M \\) is the mass of Earth (\\( 5.972 \\times 10^{24} \\, \\text{kg} \\)),\n- \\( R \\) is the radius of Earth (\\( 6.371 \\times 10^6 \\, \\text{m} \\)).\n\n### Step-by-Step Calculation:\n\n1. **Plug in the values:**\n   \\[\n   v_e = \\sqrt{\\frac{2 \\times (6.67430 \\times 10^{-11}) \\times (5.972 \\times 10^{24})}{6.371 \\times 10^6}}\n   \\]\n\n2. **Calculate the numerator:**\n   \\[\n   2 \\times 6.67430 \\times 10^{-11} \\times 5.972 \\times 10^{24} = 7.977 \\times 10^{14} \\, \\text{m}^3 \\text{s}^{-2}\n   \\]\n\n3. **Divide by the radius:**\n   \\[\n   \\frac{7.977 \\times 10^{14}}{6",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using escape velocity formula"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 4,
-          "question": "State Kepler's third law of planetary motion. How does orbital period relate to orbital radius?",
-          "response": "**Kepler's Third Law of Planetary Motion** states that the square of the orbital period \\( T \\) of a planet is directly proportional to the cube of the semi-major axis \\( a \\) of its orbit. Mathematically, this is expressed as:\n\n\\[\nT^2 \\propto a^3\n\\]\n\n### Derivation and Explanation:\n1. **Newton's Formulation**:\n   Kepler's third law can be derived from Newton's law of universal gravitation and the laws of motion. For a planet of mass \\( m \\) orbiting a star of mass \\( M \\) (where \\( M \\gg m \\)), the gravitational force provides the centripetal force for the orbit:\n\n   \\[\n   F = \\frac{GMm}{a^2} = \\frac{mv^2}{a}\n   \\]\n\n   where:\n   - \\( G \\) is the gravitational constant,\n   - \\( v \\) is the orbital velocity,\n   - \\( a \\) is the semi-major axis (orbital radius for circular orbits).\n\n2. **Orbital Velocity**:\n   The orbital velocity \\( v \\) is related to the orbital period \\( T \\) by:\n\n   \\[\n   v = \\frac{2\\pi a}{T}\n   \\]\n\n   Substituting \\( v \\) into the force equation:\n\n   \\[\n   \\frac{GMm}{a^2} = \\frac{m \\left( \\frac{2\\pi a}{T} \\right)^2}{a}\n   \\]\n\n3. **Simplify**:\n   Cancel \\( m \\) and simplify:\n\n   \\[\n   \\frac{GM}{a^2} = \\frac{4\\pi",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Newton's laws"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 5,
-          "question": "What is the orbital period of Mars around the Sun in Earth days?",
-          "response": "To find the orbital period of Mars around the Sun, we can use **Kepler's Third Law of Planetary Motion**, which relates the orbital period \\( T \\) of a planet to its semi-major axis \\( a \\):\n\n\\[\nT^2 = \\frac{4 \\pi^2}{G M} a^3\n\\]\n\nwhere:\n- \\( T \\) is the orbital period,\n- \\( a \\) is the semi-major axis of the orbit,\n- \\( G \\) is the gravitational constant (\\( 6.67430 \\times 10^{-11} \\, \\text{m}^3 \\text{kg}^{-1} \\text{s}^{-2} \\)),\n- \\( M \\) is the mass of the Sun (\\( 1.989 \\times 10^{30} \\, \\text{kg} \\)).\n\n### Step 1: Use Mars' semi-major axis\nThe semi-major axis of Mars' orbit is approximately:\n\\[\na = 2.279 \\times 10^{11} \\, \\text{m}\n\\]\n\n### Step 2: Plug into Kepler's Third Law\n\\[\nT^2 = \\frac{4 \\pi^2}{(6.67430 \\times 10^{-11})(1.989 \\times 10^{30})} (2.279 \\times 10^{11})^3\n\\]\n\n### Step 3: Simplify\n\\[\nT^2 = \\frac{4 \\pi^2}{1.327 \\times 10^{20}} \\times 1.183",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "KEPLER",
-          "task_index": 6,
-          "question": "At what distance from the Sun (in AU) does Jupiter orbit, and what is its orbital period in Earth years?",
-          "response": "To determine Jupiter's orbital distance from the Sun and its orbital period, we use **Kepler's Third Law of Planetary Motion**, which relates the orbital period \\( T \\) (in Earth years) to the semi-major axis \\( a \\) (in AU) of the orbit:\n\n\\[\nT^2 = a^3\n\\]\n\n### Step 1: Jupiter's Orbital Distance (\\( a \\))\nFrom astronomical observations, Jupiter's semi-major axis is approximately:\n\n\\[\na = 5.2 \\, \\text{AU}\n\\]\n\n### Step 2: Jupiter's Orbital Period (\\( T \\))\nUsing Kepler's Third Law:\n\n\\[\nT^2 = a^3 = (5.2)^3\n\\]\n\n\\[\nT^2 = 140.608\n\\]\n\n\\[\nT = \\sqrt{140.608} \\approx 11.86 \\, \\text{Earth years}\n\\]\n\n### Final Answer:\n- **Orbital distance from the Sun:** \\( 5.2 \\, \\text{AU} \\)\n- **Orbital period:** \\( 11.86 \\, \\text{Earth years} \\)",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 1,
-          "question": "If the gravitational constant G were exactly twice its current value, but Earth's orbital radius stayed the same, by what factor would Earth's orbital period change? Show your derivation step by step.",
-          "response": "To determine how Earth's orbital period \\( T \\) would change if the gravitational constant \\( G \\) were doubled while keeping the orbital radius \\( r \\) the same, we start with Kepler's Third Law of planetary motion, which relates the orbital period to the semi-major axis (here, the orbital radius \\( r \\)) and the mass of the central body (the Sun, with mass \\( M \\)):\n\n\\[\nT^2 = \\frac{4 \\pi^2 r^3}{G M}\n\\]\n\n### Step 1: Original Orbital Period\nThe original orbital period \\( T_1 \\) is given by:\n\n\\[\nT_1^2 = \\frac{4 \\pi^2 r^3}{G M}\n\\]\n\n### Step 2: New Gravitational Constant\nIf \\( G \\) is doubled, the new gravitational constant is \\( G' = 2G \\). The new orbital period \\( T_2 \\) is:\n\n\\[\nT_2^2 = \\frac{4 \\pi^2 r^3}{G' M} = \\frac{4 \\pi^2 r^3}{2G M}\n\\]\n\n### Step 3: Ratio of New to Original Period\nDivide \\( T_2^2 \\) by \\( T_1^2 \\):\n\n\\[\n\\frac{T_2^2}{T_1^2} = \\frac{\\frac{4 \\pi^2 r^3}{2G M}}{\\frac{4 \\pi^2 r^3}{G M}} = \\frac{1}{2}\n\\]\n\nTaking the square root of both sides:\n\n\\[\n\\frac{T_2}{T_1} = \\",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 2,
-          "question": "A planet orbits a star where the gravitational force scales as F proportional to r^(-3) instead of r^(-2). Derive whether circular orbits are stable under this law.",
-          "response": "To determine the stability of circular orbits under a gravitational force law where \\( F \\propto r^{-3} \\), we analyze the effective potential and its second derivative.\n\n### Step 1: Effective Potential\nThe gravitational force is given by:\n\\[\nF(r) = -\\frac{k}{r^3}, \\quad k > 0.\n\\]\nThe potential energy \\( U(r) \\) is obtained by integrating the force:\n\\[\nU(r) = -\\int F(r) \\, dr = -\\int \\left(-\\frac{k}{r^3}\\right) dr = -\\frac{k}{2r^2}.\n\\]\nFor a planet of mass \\( m \\), the effective potential (including centrifugal term) is:\n\\[\nU_{\\text{eff}}(r) = -\\frac{k}{2r^2} + \\frac{L^2}{2mr^2},\n\\]\nwhere \\( L \\) is the angular momentum.\n\n### Step 2: Circular Orbit Condition\nA circular orbit occurs at the minimum of \\( U_{\\text{eff}}(r) \\). The equilibrium radius \\( r_0 \\) satisfies:\n\\[\n\\frac{dU_{\\text{eff}}}{dr} = 0.\n\\]\nCompute the derivative:\n\\[\n\\frac{dU_{\\text{eff}}}{dr} = \\frac{k}{r^3} - \\frac{L^2}{mr^3} = 0 \\implies k = \\frac{L^2}{m}.\n\\]\nThus, the equilibrium radius is arbitrary (any \\( r_0 \\) satisfies this for the given \\( L \\)).\n\n### Step 3: Stability Condition\nStability requires the second derivative of \\( U_{\\text{eff}} \\",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 3,
-          "question": "In a universe where the electromagnetic force is 10 times stronger but all other constants remain fixed, derive how atomic radii would scale. Show your reasoning from first principles.",
-          "response": "To determine how atomic radii would scale if the electromagnetic force were 10 times stronger while all other constants remain fixed, we analyze the system from first principles using the Bohr model of the hydrogen atom.\n\n### Step 1: Recall the Bohr radius formula\nThe Bohr radius \\( a_0 \\) for the hydrogen atom is given by:\n\n\\[\na_0 = \\frac{4 \\pi \\epsilon_0 \\hbar^2}{m_e e^2}\n\\]\n\nwhere:\n- \\( \\epsilon_0 \\) is the permittivity of free space,\n- \\( \\hbar \\) is the reduced Planck constant,\n- \\( m_e \\) is the electron mass,\n- \\( e \\) is the elementary charge.\n\n### Step 2: Identify the dependence on the electromagnetic force\nThe electromagnetic force between the electron and proton is governed by Coulomb's law:\n\n\\[\nF = \\frac{e^2}{4 \\pi \\epsilon_0 r^2}\n\\]\n\nIf the electromagnetic force is 10 times stronger, this implies that the effective charge product \\( e^2 \\) increases by a factor of 10 (since \\( \\epsilon_0 \\) and other constants are fixed). Thus:\n\n\\[\ne^2 \\rightarrow 10 e^2\n\\]\n\n### Step 3: Substitute into the Bohr radius formula\nThe Bohr radius scales inversely with \\( e^2 \\):\n\n\\[\na_0 \\propto \\frac{1}{e^2}\n\\]\n\nWith \\( e^2 \\) increased by a factor of 10, the Bohr radius scales as:\n\n\\[\na_0 \\rightarrow \\frac{a_0}{10}\n\\]\n\n### Step 4",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using Bohr model"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 4,
-          "question": "Two identical pendulums: one on Earth, one on a planet with g=3.7 m/s^2. If both are released simultaneously, derive the exact ratio of their periods after 10 complete Earth oscillations.",
-          "response": "**Step 1: Period of a Simple Pendulum**\n\nThe period \\( T \\) of a simple pendulum is given by:\n\n\\[\nT = 2\\pi \\sqrt{\\frac{L}{g}}\n\\]\n\nwhere:\n- \\( L \\) is the length of the pendulum,\n- \\( g \\) is the acceleration due to gravity.\n\n**Step 2: Periods on Earth and the Other Planet**\n\nLet:\n- \\( T_E \\) be the period on Earth (\\( g_E = 9.8 \\, \\text{m/s}^2 \\)),\n- \\( T_P \\) be the period on the other planet (\\( g_P = 3.7 \\, \\text{m/s}^2 \\)).\n\nThe ratio of the periods is:\n\n\\[\n\\frac{T_P}{T_E} = \\frac{2\\pi \\sqrt{\\frac{L}{g_P}}}{2\\pi \\sqrt{\\frac{L}{g_E}}} = \\sqrt{\\frac{g_E}{g_P}}\n\\]\n\nSubstitute the values of \\( g_E \\) and \\( g_P \\):\n\n\\[\n\\frac{T_P}{T_E} = \\sqrt{\\frac{9.8}{3.7}} = \\sqrt{\\frac{98}{37}} = \\frac{\\sqrt{98}}{\\sqrt{37}} = \\frac{7\\sqrt{2}}{\\sqrt{37}}\n\\]\n\n**Step 3: Ratio After 10 Earth Oscillations**\n\nThe time for 10 oscillations on Earth is:\n\n\\[\nt = 10 T_E\n\\]\n\nThe number of oscillations on the planet in the same time \\( t \\) is:\n\n\\[\nN_P = \\frac{t}{T_P} = \\frac{10",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 5,
-          "question": "A damped oscillator has quality factor Q=5. If both damping coefficient and spring constant are simultaneously tripled, what happens to Q and resonant frequency? Derive both.",
-          "response": "Let's analyze the problem step-by-step.\n\n### Given:\n- Original quality factor: \\( Q = 5 \\)\n- Both the damping coefficient \\( c \\) and the spring constant \\( k \\) are tripled.\n\n### Definitions:\n1. **Quality factor \\( Q \\)** for a damped oscillator is given by:\n   \\[\n   Q = \\frac{\\sqrt{m k}}{c}\n   \\]\n   where:\n   - \\( m \\) is the mass,\n   - \\( k \\) is the spring constant,\n   - \\( c \\) is the damping coefficient.\n\n2. **Resonant frequency \\( \\omega_0 \\)** for a damped oscillator is given by:\n   \\[\n   \\omega_0 = \\sqrt{\\frac{k}{m} - \\left(\\frac{c}{2m}\\right)^2}\n   \\]\n   For high \\( Q \\) (light damping), this simplifies to:\n   \\[\n   \\omega_0 \\approx \\sqrt{\\frac{k}{m}}\n   \\]\n\n### Step 1: Effect on Quality Factor \\( Q \\)\nOriginal \\( Q \\):\n\\[\nQ = \\frac{\\sqrt{m k}}{c}\n\\]\n\nAfter tripling \\( c \\) and \\( k \\):\n\\[\nQ' = \\frac{\\sqrt{m (3k)}}{3c} = \\frac{\\sqrt{3} \\sqrt{m k}}{3 c} = \\frac{\\sqrt{3}}{3} \\cdot \\frac{\\sqrt{m k}}{c} = \\frac{\\sqrt{3}}{3} Q\n\\]\n\nSubstitute \\( Q = 5 \\):\n\\[\nQ' = \\frac{\\sqrt{3}}{3} \\cdot 5",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON",
-          "task_index": 6,
-          "question": "Derive the orbital velocity as a function of radius for a circular orbit under F proportional to r^(-2.5) instead of the standard inverse square law.",
-          "response": "To derive the orbital velocity \\( v(r) \\) for a circular orbit under a central force \\( F \\propto r^{-2.5} \\), follow these steps:\n\n### 1. **Force Law:**\nThe central force is given by:\n\\[\nF(r) = -\\frac{k}{r^{2.5}},\n\\]\nwhere \\( k > 0 \\) is a constant, and the negative sign indicates attraction.\n\n### 2. **Circular Orbit Condition:**\nFor a circular orbit of radius \\( r \\), the centripetal force is balanced by the central force:\n\\[\n\\frac{m v^2}{r} = \\frac{k}{r^{2.5}}.\n\\]\n\n### 3. **Solve for Orbital Velocity \\( v(r) \\):**\nRearrange the equation to isolate \\( v^2 \\):\n\\[\nv^2 = \\frac{k}{m} \\cdot \\frac{1}{r^{1.5}}.\n\\]\nTake the square root to find \\( v(r) \\):\n\\[\nv(r) = \\sqrt{\\frac{k}{m}} \\cdot r^{-0.75}.\n\\]\n\n### 4. **Final Expression:**\nThe orbital velocity as a function of radius is:\n\\[\n\\boxed{v(r) = \\sqrt{\\frac{k}{m}} \\cdot r^{-3/4}}.\n\\]\n\n### Key Observations:\n- The velocity decreases with radius (\\( v \\propto r^{-3/4} \\)), unlike the Keplerian case (\\( v \\propto r^{-1/2} \\)).\n- The exponent \\( -3/4 \\) arises from the balance between the \\( r^{-2.5",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 1,
-          "question": "In a universe where Planck's constant h-bar is 7.3 times larger and the fine structure constant is 0.1 times its current value, derive the ratio of ground-state hydrogen energies between this universe and ours.",
-          "response": "Let's derive the ratio of the ground-state hydrogen energy in the modified universe to that in our universe step-by-step.\n\n### Step 1: Recall the ground-state energy of hydrogen in our universe\nThe ground-state energy of hydrogen in our universe is given by the Rydberg formula:\n\n\\[ E_n = -\\frac{m_e e^4}{2 (4 \\pi \\epsilon_0)^2 \\hbar^2} \\cdot \\frac{1}{n^2} \\]\n\nFor the ground state (\\( n = 1 \\)):\n\n\\[ E_1 = -\\frac{m_e e^4}{2 (4 \\pi \\epsilon_0)^2 \\hbar^2} \\]\n\n### Step 2: Express the energy in terms of the fine structure constant\nThe fine structure constant (\\(\\alpha\\)) is defined as:\n\n\\[ \\alpha = \\frac{e^2}{4 \\pi \\epsilon_0 \\hbar c} \\]\n\nWe can rewrite the ground-state energy in terms of \\(\\alpha\\):\n\n\\[ E_1 = -\\frac{m_e c^2 \\alpha^2}{2} \\]\n\n### Step 3: Define the modified constants\nIn the modified universe:\n- \\(\\hbar' = 7.3 \\hbar\\)\n- \\(\\alpha' = 0.1 \\alpha\\)\n\n### Step 4: Compute the ground-state energy in the modified universe\nUsing the same formula for \\(E_1\\) but with the modified constants:\n\n\\[ E_1' = -\\frac{m_e (c')^2 (\\alpha')^2}{2} \\]\n\nAssuming the speed of light \\(c\\) remains unchanged (\\(c' = c\\)):\n\n\\[ E_1' = -\\frac{m_e c^2 (0",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 2,
-          "question": "A cognitive system operates in 5-dimensional space with metric g_ij = delta_ij + 0.3*x_i*x_j. Derive the geodesic equation for small perturbations around the origin.",
-          "response": "To derive the geodesic equation for small perturbations around the origin in the given 5-dimensional space, we follow these steps:\n\n### 1. **Metric Tensor and Inverse Metric**\nThe metric tensor is given by:\n\\[ g_{ij} = \\delta_{ij} + 0.3 \\, x_i x_j \\]\n\nFor small perturbations around the origin (\\( x_i \\approx 0 \\)), we can approximate the inverse metric \\( g^{ij} \\) using a perturbative expansion. The inverse metric satisfies:\n\\[ g^{ik} g_{kj} = \\delta_i^j \\]\n\nAssume \\( g^{ij} \\approx \\delta^{ij} + \\epsilon^{ij} \\), where \\( \\epsilon^{ij} \\) is a small correction. Substituting and solving to first order in \\( x_i \\), we find:\n\\[ g^{ij} \\approx \\delta^{ij} - 0.3 \\, x_i x_j \\]\n\n### 2. **Christoffel Symbols**\nThe Christoffel symbols are given by:\n\\[ \\Gamma^k_{ij} = \\frac{1}{2} g^{kl} \\left( \\partial_i g_{jl} + \\partial_j g_{il} - \\partial_l g_{ij} \\right) \\]\n\nCompute the derivatives of the metric:\n\\[ \\partial_i g_{jk} = 0.3 (\\delta_{ij} x_k + \\delta_{ik} x_j) \\]\n\nSubstitute into the Christoffel symbol formula:\n\\[ \\Gamma^k_{ij} \\approx \\frac{1}{2} (\\delta^{kl} - 0.3 x_k x_l) \\cdot 0",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation provided for geodesic equation"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 3,
-          "question": "In a statistical system where particles obey n_i = 1/(exp(beta*(E_i - mu)) + 0.5) instead of standard Fermi-Dirac or Bose-Einstein, derive the equation of state for an ideal gas of such particles.",
-          "response": "To derive the equation of state for an ideal gas of particles obeying the given distribution:\n\n\\[ n_i = \\frac{1}{\\exp(\\beta (E_i - \\mu)) + 0.5} \\]\n\nwhere:\n- \\( n_i \\) is the occupation number of state \\( i \\),\n- \\( \\beta = \\frac{1}{k_B T} \\),\n- \\( E_i \\) is the energy of state \\( i \\),\n- \\( \\mu \\) is the chemical potential,\n- \\( k_B \\) is the Boltzmann constant,\n- \\( T \\) is the temperature.\n\n### Step 1: Total Particle Number\nThe total number of particles \\( N \\) is the sum of \\( n_i \\) over all states:\n\n\\[ N = \\sum_i n_i = \\sum_i \\frac{1}{\\exp(\\beta (E_i - \\mu)) + 0.5} \\]\n\n### Step 2: Total Energy\nThe total energy \\( U \\) is the sum of \\( E_i n_i \\):\n\n\\[ U = \\sum_i E_i n_i = \\sum_i \\frac{E_i}{\\exp(\\beta (E_i - \\mu)) + 0.5} \\]\n\n### Step 3: Partition Function\nThe partition function \\( Z \\) for a single particle is:\n\n\\[ Z = \\sum_i \\exp(-\\beta E_i) \\]\n\nHowever, the given distribution is not the standard Fermi-Dirac or Bose-Einstein, so we need to adjust our approach. Let\u2019s define a modified partition function \\( Z' \\) that accounts for the \\( +0.5 \\) in the denominator:\n\n\\[ Z' = \\sum_i \\",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.6,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation attempted, but incomplete"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 4,
-          "question": "A fluid obeys modified Navier-Stokes where the viscosity term is mu*laplacian^2(v) (biharmonic) instead of mu*laplacian(v). Derive the dispersion relation for small-amplitude waves.",
-          "response": "To derive the dispersion relation for small-amplitude waves in a fluid obeying the modified Navier-Stokes equation with a biharmonic viscosity term, we follow these steps:\n\n### 1. Governing Equation\nThe modified Navier-Stokes equation (incompressible flow) is:\n\\[\n\\rho \\left( \\frac{\\partial \\mathbf{v}}{\\partial t} + \\mathbf{v} \\cdot \\nabla \\mathbf{v} \\right) = -\\nabla p + \\mu \\nabla^4 \\mathbf{v},\n\\]\nwhere:\n- \\(\\mathbf{v}\\) is the velocity field,\n- \\(p\\) is the pressure,\n- \\(\\rho\\) is the density,\n- \\(\\mu\\) is the viscosity coefficient,\n- \\(\\nabla^4 = \\nabla^2 \\nabla^2\\) is the biharmonic operator.\n\nFor small-amplitude waves, we linearize the equation by neglecting the nonlinear term \\(\\mathbf{v} \\cdot \\nabla \\mathbf{v}\\):\n\\[\n\\rho \\frac{\\partial \\mathbf{v}}{\\partial t} = -\\nabla p + \\mu \\nabla^4 \\mathbf{v}.\n\\]\n\n### 2. Linearization and Fourier Analysis\nAssume a plane wave solution of the form:\n\\[\n\\mathbf{v}(\\mathbf{x}, t) = \\mathbf{v}_0 e^{i(\\mathbf{k} \\cdot \\mathbf{x} - \\omega t)}, \\quad p(\\mathbf{x}, t) = p_0 e^{i(\\mathbf{k} \\cdot \\mathbf{x} - \\omega t)},\n\\]\nwhere:\n- \\(\\mathbf{k}\\) is the wavevector,\n- \\(\\omega\\) is the angular frequency,\n- \\(\\mathbf{v}_0\\) and \\(p_0",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 5,
-          "question": "An information system encodes symbols with P(i) proportional to exp(-beta * E_i^0.7). Derive the entropy as a function of beta and compare to the standard (exponent=1) case.",
-          "response": "### Step 1: General Form of the Probability Distribution\nGiven the probability distribution:\n\\[ P(i) \\propto \\exp(-\\beta E_i^{0.7}) \\]\n\nWe can write it explicitly as:\n\\[ P(i) = \\frac{\\exp(-\\beta E_i^{0.7})}{Z(\\beta)} \\]\nwhere \\( Z(\\beta) \\) is the partition function:\n\\[ Z(\\beta) = \\sum_i \\exp(-\\beta E_i^{0.7}) \\]\n\n### Step 2: Entropy Definition\nThe entropy \\( S \\) is given by:\n\\[ S = -k_B \\sum_i P(i) \\ln P(i) \\]\n\nSubstitute \\( P(i) \\):\n\\[ S = -k_B \\sum_i \\frac{\\exp(-\\beta E_i^{0.7})}{Z(\\beta)} \\ln \\left( \\frac{\\exp(-\\beta E_i^{0.7})}{Z(\\beta)} \\right) \\]\n\\[ S = -k_B \\sum_i \\frac{\\exp(-\\beta E_i^{0.7})}{Z(\\beta)} \\left( -\\beta E_i^{0.7} - \\ln Z(\\beta) \\right) \\]\n\n### Step 3: Simplify the Entropy Expression\n\\[ S = k_B \\beta \\sum_i \\frac{E_i^{0.7} \\exp(-\\beta E_i^{0.7})}{Z(\\beta)} + k_B \\ln Z(\\beta) \\sum_i \\frac{\\exp(-\\beta E_i^{0.7})}{Z(\\beta)} \\]\n\nThe second sum is 1 (normalization), and the first sum is the average energy-like term \\( \\langle E^{0",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "mistral/mistral-small",
-          "category": "NEWTON_OOD",
-          "task_index": 6,
-          "question": "In spacetime with metric signature (-,-,+,+) instead of (-,+,+,+), which relationships from standard electromagnetism remain unchanged, which change, and which become undefined? Derive systematically.",
-          "response": "In a spacetime with metric signature \\((-,-,+,+)\\) instead of the standard \\((-,+,+,+)\\), we analyze the changes to electromagnetism by examining the metric's effect on key quantities and equations. Here's a systematic derivation:\n\n---\n\n### **1. Metric and Inverse Metric**\n- **Signature \\((-,-,+,+)\\)**:\n  \\[\n  g_{\\mu\\nu} = \\begin{pmatrix}\n  -1 & 0 & 0 & 0 \\\\\n  0 & -1 & 0 & 0 \\\\\n  0 & 0 & 1 & 0 \\\\\n  0 & 0 & 0 & 1\n  \\end{pmatrix}, \\quad\n  g^{\\mu\\nu} = \\begin{pmatrix}\n  -1 & 0 & 0 & 0 \\\\\n  0 & -1 & 0 & 0 \\\\\n  0 & 0 & 1 & 0 \\\\\n  0 & 0 & 0 & 1\n  \\end{pmatrix}.\n  \\]\n- The metric is diagonal, with two negative and two positive eigenvalues.\n\n---\n\n### **2. Electromagnetic Field Tensor \\(F_{\\mu\\nu}\\)**\n- **Definition**: \\(F_{\\mu\\nu} = \\partial_\\mu A_\\nu - \\partial_\\nu A_\\mu\\) (unchanged).\n- **Dual Tensor \\(F^{\\mu\\nu}\\)**:\n  \\[\n  F^{\\mu\\nu} = g^{\\mu\\alpha} g^{\\nu\\beta} F_{\\alpha\\beta}.\n  \\]\n  - For the \\((-,-,+,+)\\) signature, \\(F^{\\mu\\nu}\\) has the same form as in \\((-,+,+,+",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        }
-      ],
-      "entropy_trajectories": {
-        "KEPLER_task1": [],
-        "KEPLER_task2": [],
-        "KEPLER_task3": [],
-        "KEPLER_task4": [],
-        "KEPLER_task5": [],
-        "KEPLER_task6": [],
-        "NEWTON_task1": [],
-        "NEWTON_task2": [],
-        "NEWTON_task3": [],
-        "NEWTON_task4": [],
-        "NEWTON_task5": [],
-        "NEWTON_task6": [],
-        "NEWTON_OOD_task1": [],
-        "NEWTON_OOD_task2": [],
-        "NEWTON_OOD_task3": [],
-        "NEWTON_OOD_task4": [],
-        "NEWTON_OOD_task5": [],
-        "NEWTON_OOD_task6": []
-      },
-      "verdict": "mistral-small (Mistral API): NO ENTROPY DATA \u2014 accuracy only"
-    },
-    "groq/llama3-70b-8192": {
-      "category_stats": {
-        "KEPLER": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.9983333333333334,
-          "std_accuracy": 0.003726779962499653,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.21640492661432037,
-            "KEPLER_vs_NEWTON_OOD": 0.0005236210350978136,
-            "NEWTON_vs_NEWTON_OOD": 0.01887349573075815
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.8160115814308616,
-            "KEPLER_vs_NEWTON_OOD": 4.504655976413574,
-            "NEWTON_vs_NEWTON_OOD": 1.678121555198845
-          }
-        },
-        "NEWTON": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.9500000000000001,
-          "std_accuracy": 0.07637626158259732,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.21640492661432037,
-            "KEPLER_vs_NEWTON_OOD": 0.0005236210350978136,
-            "NEWTON_vs_NEWTON_OOD": 0.01887349573075815
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.8160115814308616,
-            "KEPLER_vs_NEWTON_OOD": 4.504655976413574,
-            "NEWTON_vs_NEWTON_OOD": 1.678121555198845
-          }
-        },
-        "NEWTON_OOD": {
-          "mean_entropy": null,
-          "std_entropy": null,
-          "mean_accuracy": 0.8333333333333334,
-          "std_accuracy": 0.04714045207910316,
-          "landauer_efficiency": null,
-          "n_entropy": 0,
-          "n_accuracy": 6,
-          "entropy_pvals": {
-            "KEPLER_vs_NEWTON": NaN,
-            "KEPLER_vs_NEWTON_OOD": NaN,
-            "NEWTON_vs_NEWTON_OOD": NaN
-          },
-          "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.21640492661432037,
-            "KEPLER_vs_NEWTON_OOD": 0.0005236210350978136,
-            "NEWTON_vs_NEWTON_OOD": 0.01887349573075815
-          },
-          "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.8160115814308616,
-            "KEPLER_vs_NEWTON_OOD": 4.504655976413574,
-            "NEWTON_vs_NEWTON_OOD": 1.678121555198845
-          }
-        }
-      },
-      "raw_results": [
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 1,
-          "question": "What is the orbital period of Earth around the Sun? Give your answer in days and briefly explain.",
-          "response": "To find the orbital period of Earth, we can use Kepler's third law, which states that the square of the orbital period (T) is proportional to the cube of the semi-major axis (a) of the orbit. \n\nFor Earth, the semi-major axis is approximately 1 astronomical unit (AU), where 1 AU = 1.496 x 10^11 meters. The orbital period can be calculated using the following formula:\n\nT^2 = (4\u03c0^2 / G \\* M) \\* a^3\n\nwhere G is the gravitational constant (6.674 x 10^-11 N m^2 kg^-2) and M is the mass of the Sun (1.989 x 10^30 kg).\n\nHowever, since we know the average distance of Earth from the Sun (a) and the gravitational constant (G) and the mass of the Sun (M), we can use the simplified version of the formula:\n\nT = 2\u03c0 \u221a(a^3 / G \\* M)\n\nPlugging in the values, we get:\n\nT \u2248 365.25 days\n\nThis is the orbital period of Earth, which is approximately 365.25 days. This is the time it takes for Earth to complete one orbit around the Sun.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 2,
-          "question": "What is the approximate value of the universal gravitational constant G in SI units? State the value and its units.",
-          "response": "The universal gravitational constant G is approximately 6.674 * 10^-11 N*m^2/kg^2.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "heuristic",
-          "judge_justification": "Correct value, but no derivation provided"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 3,
-          "question": "What is Earth's escape velocity from its surface? Give the numerical value in km/s.",
-          "response": "To find Earth's escape velocity, we use the formula:\n\nv = \u221a(2GM/R)\n\nwhere:\nv = escape velocity\nG = gravitational constant (6.67408e-11 N m^2 kg^-2)\nM = Earth's mass (5.97237e24 kg)\nR = Earth's radius (6.371e6 m)\n\nFirst, convert R to meters is already done. \n\nNow, plug in the values:\n\nv = \u221a(2 * 6.67408e-11 * 5.97237e24 / 6.371e6)\nv = \u221a(11.966e14 / 6.371e6)\nv = \u221a1.877e8\nv = 11.18 km/s\n\nSo, Earth's escape velocity from its surface is approximately 11.18 km/s.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using gravitational constant and Earth's mass and radius."
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 4,
-          "question": "State Kepler's third law of planetary motion. How does orbital period relate to orbital radius?",
-          "response": "Kepler's third law of planetary motion states that the square of the orbital period (T) of a planet is proportional to the cube of its semi-major axis (or orbital radius, r). Mathematically, this is expressed as:\n\nT\u00b2 \u221d r\u00b3\n\nOr, in a more precise form:\n\nT\u00b2 = (4\u03c0\u00b2/GM) * r\u00b3\n\nwhere:\n- T is the orbital period\n- r is the semi-major axis (or orbital radius)\n- G is the gravitational constant\n- M is the mass of the central body (e.g., the Sun)\n\nThis law implies that as the orbital radius increases, the orbital period also increases, but at a faster rate.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 5,
-          "question": "What is the orbital period of Mars around the Sun in Earth days?",
-          "response": "To find the orbital period of Mars, we can use Kepler's third law, which states that the square of the orbital period (T) is proportional to the cube of the semi-major axis (a) of the orbit. \n\nThe semi-major axis of Mars is approximately 1.524 AU (astronomical units), and the semi-major axis of Earth is 1 AU. \n\nUsing Kepler's third law:\n\n(T_Mars / T_Earth) = (a_Mars / a_Earth)^(3/2)\n\nWe know that the orbital period of Earth (T_Earth) is 1 year, which is approximately 365.25 days.\n\nGiven a_Mars = 1.524 AU and a_Earth = 1 AU:\n\nT_Mars = T_Earth * (a_Mars / a_Earth)^(3/2)\n= 365.25 days * (1.524 / 1)^(3/2)\n= 365.25 days * (1.524)^(3/2)\n= 365.25 days * 1.8808\n\u2248 687.0 days\n\nSo, the orbital period of Mars around the Sun is approximately 687 Earth days.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.99,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "KEPLER",
-          "task_index": 6,
-          "question": "At what distance from the Sun (in AU) does Jupiter orbit, and what is its orbital period in Earth years?",
-          "response": "To find Jupiter's distance from the Sun and its orbital period, we can use the following information:\n\n1. Average distance of Jupiter from the Sun (semi-major axis): 778.3 million kilometers\n2. Conversion factor: 1 AU = 149.6 million kilometers\n3. Orbital period of Jupiter: approximately 11.86 years (in Earth years), but we can derive it using Kepler's third law.\n\nFirst, let's convert Jupiter's semi-major axis to AU:\n778.3 million km / 149.6 million km/AU \u2248 5.20 AU\n\nNext, we can use Kepler's third law to derive the orbital period (T) of Jupiter in Earth years:\nT\u00b2 \u221d a\u00b3, where a is the semi-major axis in AU.\n\nFor Earth, a = 1 AU and T = 1 year. For Jupiter, a \u2248 5.20 AU. Let's set up a proportion:\nT\u00b2 / 1\u00b2 = (5.20)\u00b3 / 1\u00b3\nT\u00b2 = (5.20)\u00b3\nT\u00b2 \u2248 140.6\nT \u2248 \u221a140.6 \u2248 11.86 years\n\nSo, Jupiter orbits the Sun at an average distance of approximately 5.20 AU, with an orbital period of approximately 11.86 years.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using Kepler's third law"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 1,
-          "question": "If the gravitational constant G were exactly twice its current value, but Earth's orbital radius stayed the same, by what factor would Earth's orbital period change? Show your derivation step by step.",
-          "response": "To find the change in Earth's orbital period, we can use Kepler's third law, which relates the orbital period (T) of a planet to its semi-major axis (a) and the gravitational constant (G) and mass of the central body (M), in this case, the Sun:\n\nT\u00b2 = (4\u03c0\u00b2/GM) \\* a\u00b3\n\nGiven that the gravitational constant G is exactly twice its current value (G' = 2G), and Earth's orbital radius (a) stays the same, we can set up a ratio of the new orbital period (T') to the original orbital period (T):\n\n(T')\u00b2 / T\u00b2 = ((4\u03c0\u00b2/G'M) \\* a\u00b3) / ((4\u03c0\u00b2/GM) \\* a\u00b3)\n\nSubstitute G' = 2G:\n\n(T')\u00b2 / T\u00b2 = ((4\u03c0\u00b2/(2G)M) \\* a\u00b3) / ((4\u03c0\u00b2/GM) \\* a\u00b3)\n\nSimplify the equation by canceling out the constants and a\u00b3:\n\n(T')\u00b2 / T\u00b2 = (1/2)\n\nTake the square root of both sides:\n\nT' / T = 1/\u221a2\n\nSo, Earth's orbital period would change by a factor of 1/\u221a2. To find the approximate numerical value:\n\nT' \u2248 T / \u221a2 \u2248 0.707 \\* T\n\nTherefore, Earth's orbital period would decrease by a factor of approximately 0.707 if the gravitational constant G were exactly twice its current value, but Earth's orbital radius stayed the same.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 2,
-          "question": "A planet orbits a star where the gravitational force scales as F proportional to r^(-3) instead of r^(-2). Derive whether circular orbits are stable under this law.",
-          "response": "To determine the stability of circular orbits under the given gravitational force law, we'll analyze the equation of motion and the conditions for circular orbits.\n\nGiven: F \u221d r^(-3)\n\nWe can write the gravitational force as F = -k/r^3, where k is a constant.\n\nFor circular orbits, the force provides the centripetal acceleration. The equation of motion is:\n\nF = ma = -k/r^3 = mv^2/r\n\nwhere m is the mass of the planet, v is its velocity, and r is the radius of the orbit.\n\nRearranging the equation, we get:\n\nv^2 = k/(mr^2)\n\nNow, let's consider a small perturbation in the radius of the orbit, \u03b4r. The new radius is r + \u03b4r. We want to check if the orbit returns to its original radius (stable) or deviates further (unstable).\n\nThe new velocity can be found using the vis-viva equation, which is derived from the conservation of energy. However, for small perturbations, we can use the equation:\n\nv'^2 = k/(m(r + \u03b4r)^2)\n\nExpanding the denominator, we get:\n\nv'^2 \u2248 k/(mr^2) - 2k\u03b4r/(mr^3)\n\nComparing this with the original velocity, we get:\n\nv'^2 - v^2 \u2248 -2k\u03b4r/(mr^3)\n\nSubstituting v^2 = k/(mr^2), we get:\n\nv'^2 - k/(mr^2) \u2248 -2k\u03b4r/(mr^3)\n\nSimplifying, we get:\n\nv'^2 \u2248 k/(mr^2) -",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 3,
-          "question": "In a universe where the electromagnetic force is 10 times stronger but all other constants remain fixed, derive how atomic radii would scale. Show your reasoning from first principles.",
-          "response": "To derive how atomic radii would scale, we'll start with the Bohr model of the hydrogen atom. The energy of the electron in the ground state is given by:\n\nE = -ke^2 / (2r)\n\nwhere k is Coulomb's constant, e is the elementary charge, and r is the radius of the atom.\n\nThe electromagnetic force is 10 times stronger, so Coulomb's constant k is 10 times larger. However, we need to express k in terms of the fundamental constants. Coulomb's constant is given by:\n\nk = 1 / (4\u03c0\u03b5\u2080)\n\nwhere \u03b5\u2080 is the electric constant (permittivity of free space).\n\nSince the electromagnetic force is 10 times stronger, we can write:\n\nk' = 10k = 10 / (4\u03c0\u03b5\u2080)\n\nNow, we'll use the fact that the energy of the electron is also given by the balance between the kinetic energy and the potential energy:\n\nE = p\u00b2 / (2m) - ke^2 / r\n\nwhere p is the momentum of the electron, m is the mass of the electron, and r is the radius of the atom.\n\nAt the ground state, the energy is minimized, and the electron is in a stable orbit. The momentum of the electron can be expressed in terms of the radius and the angular momentum (which is quantized):\n\np = \u210f / r\n\nwhere \u210f is the reduced Planck constant.\n\nSubstituting this expression for p into the energy equation, we get:\n\nE = \u210f\u00b2 / (2mr\u00b2) - ke^2 / r\n\nNow, we'll minimize the energy with respect to r to find the equilibrium radius. Taking the derivative of E",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, using Bohr model and fundamental constants."
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 4,
-          "question": "Two identical pendulums: one on Earth, one on a planet with g=3.7 m/s^2. If both are released simultaneously, derive the exact ratio of their periods after 10 complete Earth oscillations.",
-          "response": "To derive the ratio of their periods, we first need to find the period of each pendulum. The period of a simple pendulum is given by:\n\nT = 2\u03c0 \u221a(L/g)\n\nwhere T is the period, L is the length of the pendulum, and g is the acceleration due to gravity.\n\nLet's denote the period of the pendulum on Earth as T\u2081 and the period of the pendulum on the other planet as T\u2082. Since the pendulums are identical, their lengths are the same (L).\n\nThe acceleration due to gravity on Earth is g\u2081 = 9.8 m/s\u00b2, and on the other planet is g\u2082 = 3.7 m/s\u00b2.\n\nThe periods are:\nT\u2081 = 2\u03c0 \u221a(L/9.8)\nT\u2082 = 2\u03c0 \u221a(L/3.7)\n\nNow, we can find the ratio of their periods:\nT\u2081/T\u2082 = \u221a(L/9.8) / \u221a(L/3.7)\n= \u221a(3.7/9.8)\n= \u221a(0.378)\n\u2248 0.6145\n\nHowever, we are interested in the ratio of their periods after 10 complete Earth oscillations. Since the pendulums oscillate at different frequencies, the number of oscillations on the other planet will be different.\n\nLet's denote the number of oscillations on the other planet as n\u2082. Since the time elapsed is the same for both pendulums (10T\u2081), we can set up the equation:\n10T\u2081 = n\u2082T\u2082\n\nSubstituting the expressions for T\u2081 and T\u2082:\n10 (2\u03c0 \u221a(L/9",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 5,
-          "question": "A damped oscillator has quality factor Q=5. If both damping coefficient and spring constant are simultaneously tripled, what happens to Q and resonant frequency? Derive both.",
-          "response": "The quality factor (Q) of a damped oscillator is given by:\n\nQ = \u03c9\u2080 / (2\u03b2)\n\nwhere \u03c9\u2080 is the resonant frequency and \u03b2 is the damping coefficient.\n\nThe resonant frequency (\u03c9\u2080) is given by:\n\n\u03c9\u2080 = \u221a(k / m)\n\nwhere k is the spring constant and m is the mass of the oscillator.\n\nInitially, Q = 5, so:\n\n5 = \u03c9\u2080 / (2\u03b2)\n\nNow, if both the damping coefficient (\u03b2) and the spring constant (k) are tripled, the new values are:\n\n\u03b2' = 3\u03b2\nk' = 3k\n\nThe new resonant frequency (\u03c9\u2080') is:\n\n\u03c9\u2080' = \u221a(k' / m) = \u221a(3k / m) = \u221a3 * \u221a(k / m) = \u221a3 * \u03c9\u2080\n\nThe new quality factor (Q') is:\n\nQ' = \u03c9\u2080' / (2\u03b2') = (\u221a3 * \u03c9\u2080) / (2 * 3\u03b2) = (\u221a3 * \u03c9\u2080) / (6\u03b2) = (\u221a3 / 3) * (\u03c9\u2080 / 2\u03b2)\n\nSince Q = \u03c9\u2080 / (2\u03b2) = 5, we can substitute this into the equation for Q':\n\nQ' = (\u221a3 / 3) * 5\n\nQ' = (\u221a3 / 3) * Q\nQ' \u2248 0.577 * 5\nQ' \u2248 2.89\n\nSo, the quality factor (Q) decreases to approximately 2.89.\n\nThe resonant frequency (\u03c9\u2080') increases by a factor of \u221a3:\n\n\u03c9\u2080",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON",
-          "task_index": 6,
-          "question": "Derive the orbital velocity as a function of radius for a circular orbit under F proportional to r^(-2.5) instead of the standard inverse square law.",
-          "response": "To derive the orbital velocity as a function of radius for a circular orbit under a force proportional to \\(r^{-2.5}\\), we start with the general form of the force:\n\n\\[F = \\frac{k}{r^{2.5}}\\]\n\nwhere \\(k\\) is a constant. For a circular orbit, the force provides the centripetal acceleration, so we have:\n\n\\[F = \\frac{mv^2}{r}\\]\n\nwhere \\(m\\) is the mass of the orbiting object, \\(v\\) is its velocity, and \\(r\\) is the radius of the orbit.\n\nEquating the two expressions for \\(F\\), we get:\n\n\\[\\frac{k}{r^{2.5}} = \\frac{mv^2}{r}\\]\n\nRearranging to solve for \\(v^2\\), we find:\n\n\\[v^2 = \\frac{k}{mr^{1.5}}\\]\n\nTaking the square root of both sides to solve for \\(v\\), we obtain:\n\n\\[v = \\sqrt{\\frac{k}{mr^{1.5}}}\\]\n\nThis is the orbital velocity as a function of radius for a circular orbit under a force proportional to \\(r^{-2.5}\\). Note that the standard inverse square law corresponds to \\(F \\propto r^{-2}\\), which would yield \\(v \\propto r^{-0.5}\\) for circular orbits. The \\(r^{-2.5}\\) dependence leads to a steeper decrease in orbital velocity with increasing radius.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 1,
-          "question": "In a universe where Planck's constant h-bar is 7.3 times larger and the fine structure constant is 0.1 times its current value, derive the ratio of ground-state hydrogen energies between this universe and ours.",
-          "response": "To derive the ratio of ground-state hydrogen energies, we need to consider the Bohr model of the hydrogen atom. The energy of the ground state (n = 1) in our universe is given by:\n\nE = -13.6 eV = -me^4 / (2 * (4 * \u03c0 * \u03b50)^2 * \u0127^2)\n\nwhere m is the mass of the electron, e is the elementary charge, \u03b50 is the electric constant (permittivity of free space), and \u0127 is the reduced Planck constant.\n\nIn the alternate universe, the fine structure constant \u03b1 is 0.1 times its current value. The fine structure constant is given by:\n\n\u03b1 = e^2 / (4 * \u03c0 * \u03b50 * \u0127 * c)\n\nwhere c is the speed of light. Since \u03b1 is proportional to e^2 and inversely proportional to \u0127, we can write:\n\n\u03b1' / \u03b1 = (e'^2 / e^2) * (\u0127 / \u0127') \n\nGiven that \u03b1' = 0.1 * \u03b1 and \u0127' = 7.3 * \u0127, we can assume e' = e (since the problem doesn't specify a change in the elementary charge), so:\n\n0.1 = (\u0127 / (7.3 * \u0127))\nis not relevant, instead we use \n\u03b1' = 0.1 * \u03b1 = e^2 / (4 * \u03c0 * \u03b50 * (7.3 * \u0127) * c)\n\nNow, considering the energy of the ground state in the alternate universe:\n\nE' = -m * e^4 / (2 * (4 * \u03c0 * \u03b50)^",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete calculation"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 2,
-          "question": "A cognitive system operates in 5-dimensional space with metric g_ij = delta_ij + 0.3*x_i*x_j. Derive the geodesic equation for small perturbations around the origin.",
-          "response": "To derive the geodesic equation, we'll start with the metric tensor:\n\ng_ij = \u03b4_ij + 0.3*x_i*x_j\n\nwhere \u03b4_ij is the Kronecker delta.\n\nThe Christoffel symbols of the second kind are given by:\n\n\u0393^k_ij = (1/2) * g^km * (\u2202g_mj/\u2202x_i + \u2202g_mi/\u2202x_j - \u2202g_ij/\u2202x_m)\n\nFor small perturbations around the origin, we can assume x_i << 1. \n\nThe inverse metric tensor g^ij can be approximated as:\n\ng^ij \u2248 \u03b4_ij - 0.3*x_i*x_j (to first order in x_i)\n\nNow, let's compute the partial derivatives:\n\n\u2202g_mj/\u2202x_i = 0.3 * (x_m * \u03b4_ij + x_j * \u03b4_mi)\n\u2202g_mi/\u2202x_j = 0.3 * (x_m * \u03b4_ji + x_i * \u03b4_mj)\n\u2202g_ij/\u2202x_m = 0.3 * (x_i * \u03b4_jm + x_j * \u03b4_im)\n\nSubstituting these into the Christoffel symbols, we get:\n\n\u0393^k_ij \u2248 (1/2) * (\u03b4_km - 0.3*x_k*x_m) * (0.3 * (x_m * \u03b4_ij + x_j * \u03b4_mi) + 0.3 * (x_m * \u03b4_ji + x_i * \u03b4_mj) - 0.3 * (x_i * \u03b4_jm + x_j * \u03b4_im))\n\n",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from metric tensor"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 3,
-          "question": "In a statistical system where particles obey n_i = 1/(exp(beta*(E_i - mu)) + 0.5) instead of standard Fermi-Dirac or Bose-Einstein, derive the equation of state for an ideal gas of such particles.",
-          "response": "To derive the equation of state for an ideal gas of particles obeying the given statistical distribution, we'll follow these steps:\n\n1. **Distribution function**: The given distribution function is:\n\\[ n_i = \\frac{1}{e^{\\beta(E_i - \\mu)} + 0.5} \\]\nwhere \\( n_i \\) is the occupation number of the \\( i \\)-th energy level, \\( E_i \\) is the energy of the \\( i \\)-th level, \\( \\beta = \\frac{1}{kT} \\) (with \\( k \\) being the Boltzmann constant and \\( T \\) the temperature), and \\( \\mu \\) is the chemical potential.\n\n2. **Average occupation number**: For an ideal gas, we consider a continuum of energy levels. The average occupation number \\( \\langle n \\rangle \\) can be expressed as:\n\\[ \\langle n \\rangle = \\frac{1}{e^{\\beta(E - \\mu)} + 0.5} \\]\n\n3. **Density of states**: For an ideal gas in three dimensions, the density of states \\( g(E) \\) is given by:\n\\[ g(E) = \\frac{V}{(2\\pi\\hbar)^3} \\cdot 4\\pi p^2 \\cdot \\frac{dp}{dE} \\]\nwhere \\( V \\) is the volume, \\( \\hbar \\) is the reduced Planck constant, \\( p \\) is the momentum, and \\( E = \\frac{p^2}{2m} \\) (with \\( m \\) being the mass of the particle). This simplifies to:\n\\[ g(E)",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation started, but equation of state not fully derived"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 4,
-          "question": "A fluid obeys modified Navier-Stokes where the viscosity term is mu*laplacian^2(v) (biharmonic) instead of mu*laplacian(v). Derive the dispersion relation for small-amplitude waves.",
-          "response": "To derive the dispersion relation for small-amplitude waves in a fluid obeying the modified Navier-Stokes equation, we start with the equation:\n\n\u2202v/\u2202t + v \u2207v = -1/\u03c1 \u2207p + \u03bc \u2207^4 v\n\nwhere v is the velocity field, \u03c1 is the fluid density, p is the pressure, \u03bc is the dynamic viscosity, and \u2207^4 is the biharmonic operator.\n\nFor small-amplitude waves, we can linearize the equation by assuming v = v0 + v', where v0 = 0 (no background flow) and v' is a small perturbation. The linearized equation becomes:\n\n\u2202v'/\u2202t = -1/\u03c1 \u2207p' + \u03bc \u2207^4 v'\n\nWe also need to consider the continuity equation:\n\n\u2207 \u22c5 v' = 0\n\nFor a wave-like solution, we can assume:\n\nv' = v0' exp(i(k \u22c5 x - \u03c9t))\np' = p0' exp(i(k \u22c5 x - \u03c9t))\n\nwhere k is the wave vector, \u03c9 is the angular frequency, and v0' and p0' are constants.\n\nSubstituting these expressions into the linearized equation and the continuity equation, we get:\n\n-i\u03c9 v0' = -i k / \u03c1 p0' + \u03bc (i k)^4 v0'\n0 = i k \u22c5 v0'\n\nFrom the continuity equation, we can see that k \u22c5 v0' = 0, which implies that the wave is transverse (v0' is perpendicular to k).\n\nSubstituting this into the linear",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from modified Navier-Stokes equation"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 5,
-          "question": "An information system encodes symbols with P(i) proportional to exp(-beta * E_i^0.7). Derive the entropy as a function of beta and compare to the standard (exponent=1) case.",
-          "response": "To derive the entropy as a function of beta, we start with the given probability distribution:\n\nP(i) \u221d exp(-\u03b2 * E_i^0.7)\n\nWe can normalize this distribution by introducing a partition function Z:\n\nZ = \u2211_i exp(-\u03b2 * E_i^0.7)\n\nThen, the probability distribution becomes:\n\nP(i) = exp(-\u03b2 * E_i^0.7) / Z\n\nThe entropy H is given by:\n\nH = -\u2211_i P(i) * ln(P(i))\n\nSubstituting the expression for P(i), we get:\n\nH = -\u2211_i [exp(-\u03b2 * E_i^0.7) / Z] * ln[exp(-\u03b2 * E_i^0.7) / Z]\n\nUsing the properties of logarithms, we can simplify this expression:\n\nH = -\u2211_i [exp(-\u03b2 * E_i^0.7) / Z] * [-\u03b2 * E_i^0.7 - ln(Z)]\n\nH = \u03b2 * \u2211_i [exp(-\u03b2 * E_i^0.7) / Z] * E_i^0.7 + ln(Z) * \u2211_i [exp(-\u03b2 * E_i^0.7) / Z]\n\nSince \u2211_i P(i) = 1, the second term simplifies to:\n\nH = \u03b2 * \u2211_i [exp(-\u03b2 * E_i^0.7) / Z] * E_i^0.7 + ln(Z)\n\nNow, we can use the definition of Z to rewrite the first term:\n\nH = \u03b2 * \u2211_i [exp(-\u03b2 * E_i^0.",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        },
-        {
-          "model_id": "groq/llama3-70b-8192",
-          "category": "NEWTON_OOD",
-          "task_index": 6,
-          "question": "In spacetime with metric signature (-,-,+,+) instead of (-,+,+,+), which relationships from standard electromagnetism remain unchanged, which change, and which become undefined? Derive systematically.",
-          "response": "To analyze the changes in electromagnetism due to a metric signature change from (-,+,+,+) to (-,-,+,+), we'll examine the fundamental equations and quantities.\n\n### 1. Metric Tensor\n\nThe metric tensor \\(g_{\\mu\\nu}\\) defines the geometry of spacetime. For the standard metric signature (-,+,+,+), we have:\n\\[g_{\\mu\\nu} = \\text{diag}(-1, 1, 1, 1)\\]\n\nFor the metric signature (-,-,+,+), the metric tensor becomes:\n\\[g_{\\mu\\nu} = \\text{diag}(-1, -1, 1, 1)\\]\n\n### 2. Electromagnetic Field Tensor\n\nThe electromagnetic field tensor \\(F_{\\mu\\nu}\\) is defined as:\n\\[F_{\\mu\\nu} = \\partial_\\mu A_\\nu - \\partial_\\nu A_\\mu\\]\nwhere \\(A_\\mu\\) is the electromagnetic four-potential. This definition **remains unchanged**.\n\n### 3. Maxwell's Equations\n\nMaxwell's equations in covariant form are:\n\\[\\partial_\\mu F^{\\mu\\nu} = \\mu_0 J^\\nu\\]\n\\[\\partial_{[\\mu} F_{\\nu\\lambda]} = 0\\]\n\nThe first equation, when expanded, involves the metric tensor to raise indices:\n\\[\\partial_\\mu F^{\\mu\\nu} = \\partial_\\mu (g^{\\mu\\alpha} g^{\\nu\\beta} F_{\\alpha\\beta})\\]\n\nGiven the change in metric signature, the components of \\(F^{\\",
-          "has_logprobs": false,
-          "mean_entropy": null,
-          "std_entropy": null,
-          "token_count": 0,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
-        }
-      ],
-      "entropy_trajectories": {
-        "KEPLER_task1": [],
-        "KEPLER_task2": [],
-        "KEPLER_task3": [],
-        "KEPLER_task4": [],
-        "KEPLER_task5": [],
-        "KEPLER_task6": [],
-        "NEWTON_task1": [],
-        "NEWTON_task2": [],
-        "NEWTON_task3": [],
-        "NEWTON_task4": [],
-        "NEWTON_task5": [],
-        "NEWTON_task6": [],
-        "NEWTON_OOD_task1": [],
-        "NEWTON_OOD_task2": [],
-        "NEWTON_OOD_task3": [],
-        "NEWTON_OOD_task4": [],
-        "NEWTON_OOD_task5": [],
-        "NEWTON_OOD_task6": []
-      },
-      "verdict": "llama3-70b (Groq): NO ENTROPY DATA \u2014 accuracy only"
+      "verdict": "llama3.2:3b (Ollama): ENTROPY FLAT / ACCURACY DROP NOT SIG (n=6 \u2014 low power)  [H range=0.022 nats, acc range=0.41]"
     },
     "huggingface/meta-llama/Llama-3.1-8B-Instruct": {
       "category_stats": {
         "KEPLER": {
           "mean_entropy": 0.3597484973139866,
           "std_entropy": 0.1432798977089085,
-          "mean_accuracy": 0.6483333333333333,
-          "std_accuracy": 0.4597251594400966,
-          "landauer_efficiency": 1.80218496581369,
+          "mean_accuracy": 0.6388333333333334,
+          "std_accuracy": 0.38992324743324663,
+          "landauer_efficiency": 1.7757776282683482,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -6742,22 +6038,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.6058493247940466
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.18879123175271004,
-            "KEPLER_vs_NEWTON_OOD": 0.0010754128226745474,
-            "NEWTON_vs_NEWTON_OOD": 0.04131689076913617
+            "KEPLER_vs_NEWTON": 0.14053442474394157,
+            "KEPLER_vs_NEWTON_OOD": 0.3031096967988749,
+            "NEWTON_vs_NEWTON_OOD": 0.23513898314585407
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 1.0792682449689412,
-            "KEPLER_vs_NEWTON_OOD": 2.896177876327963,
-            "NEWTON_vs_NEWTON_OOD": 1.632993161855453
+            "KEPLER_vs_NEWTON": 0.91711972540713,
+            "KEPLER_vs_NEWTON_OOD": 0.6953523922520448,
+            "NEWTON_vs_NEWTON_OOD": -0.8551861104941368
           }
         },
         "NEWTON": {
           "mean_entropy": 0.3543517364641596,
           "std_entropy": 0.04700920426032395,
-          "mean_accuracy": 0.6,
-          "std_accuracy": 0.42817441928883765,
-          "landauer_efficiency": 1.6932328482061387,
+          "mean_accuracy": 0.16666666666666666,
+          "std_accuracy": 0.23570226039551584,
+          "landauer_efficiency": 0.47034245783503853,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -6766,22 +6062,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.6058493247940466
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.18879123175271004,
-            "KEPLER_vs_NEWTON_OOD": 0.0010754128226745474,
-            "NEWTON_vs_NEWTON_OOD": 0.04131689076913617
+            "KEPLER_vs_NEWTON": 0.14053442474394157,
+            "KEPLER_vs_NEWTON_OOD": 0.3031096967988749,
+            "NEWTON_vs_NEWTON_OOD": 0.23513898314585407
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 1.0792682449689412,
-            "KEPLER_vs_NEWTON_OOD": 2.896177876327963,
-            "NEWTON_vs_NEWTON_OOD": 1.632993161855453
+            "KEPLER_vs_NEWTON": 0.91711972540713,
+            "KEPLER_vs_NEWTON_OOD": 0.6953523922520448,
+            "NEWTON_vs_NEWTON_OOD": -0.8551861104941368
           }
         },
         "NEWTON_OOD": {
           "mean_entropy": 0.33192372313925356,
           "std_entropy": 0.08071084438800398,
-          "mean_accuracy": 0.7666666666666666,
-          "std_accuracy": 0.07453559924999302,
-          "landauer_efficiency": 2.3097676159321194,
+          "mean_accuracy": 0.39166666666666666,
+          "std_accuracy": 0.28927591596182967,
+          "landauer_efficiency": 1.1799899777044525,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -6790,14 +6086,14 @@
             "NEWTON_vs_NEWTON_OOD": 0.6058493247940466
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.18879123175271004,
-            "KEPLER_vs_NEWTON_OOD": 0.0010754128226745474,
-            "NEWTON_vs_NEWTON_OOD": 0.04131689076913617
+            "KEPLER_vs_NEWTON": 0.14053442474394157,
+            "KEPLER_vs_NEWTON_OOD": 0.3031096967988749,
+            "NEWTON_vs_NEWTON_OOD": 0.23513898314585407
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 1.0792682449689412,
-            "KEPLER_vs_NEWTON_OOD": 2.896177876327963,
-            "NEWTON_vs_NEWTON_OOD": 1.632993161855453
+            "KEPLER_vs_NEWTON": 0.91711972540713,
+            "KEPLER_vs_NEWTON_OOD": 0.6953523922520448,
+            "NEWTON_vs_NEWTON_OOD": -0.8551861104941368
           }
         }
       },
@@ -6812,9 +6108,9 @@
           "mean_entropy": 0.28048681825675315,
           "std_entropy": 0.4452984307455171,
           "token_count": 350,
-          "causal_accuracy": 0.99,
+          "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
+          "judge_justification": "\u2713 states \u2248365.25 days; mentions orbital period"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6826,9 +6122,9 @@
           "mean_entropy": 0.6761224636330606,
           "std_entropy": 0.5953326572813469,
           "token_count": 89,
-          "causal_accuracy": 1.0,
+          "causal_accuracy": 0.333,
           "reasoning_type": "heuristic",
-          "judge_justification": "Correct value stated, but no derivation provided"
+          "judge_justification": "\u2713 gives correct SI units N\u00b7m\u00b2/kg\u00b2 | \u2717 states G \u2248 6.674\u00d710\u207b\u00b9\u00b9"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6840,9 +6136,9 @@
           "mean_entropy": 0.2867901581577982,
           "std_entropy": 0.4594822792046115,
           "token_count": 216,
-          "causal_accuracy": 0.0,
-          "reasoning_type": "wrong",
-          "judge_justification": "Calculation error, correct calculation yields 11.2 km/s, but given steps result in 4.43 km/s"
+          "causal_accuracy": 1.0,
+          "reasoning_type": "causal",
+          "judge_justification": "\u2713 states \u224811.2 km/s; gives km/s units"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6856,7 +6152,7 @@
           "token_count": 153,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "judge_justification": "\u2713 writes T\u00b2\u221da\u00b3; explains the proportionality"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6868,9 +6164,9 @@
           "mean_entropy": 0.3349904968688026,
           "std_entropy": 0.4559537176918977,
           "token_count": 350,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's Third Law"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 states \u2248687 days; or \u22481.88 years"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6882,9 +6178,9 @@
           "mean_entropy": 0.26608824852013413,
           "std_entropy": 0.40402258765896054,
           "token_count": 350,
-          "causal_accuracy": 0.0,
-          "reasoning_type": "wrong",
-          "judge_justification": "Incorrect calculation of Jupiter's orbital period"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 states 5.2 AU | \u2717 states 11.86 years"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6896,9 +6192,9 @@
           "mean_entropy": 0.37515334128880606,
           "std_entropy": 0.49738904564637115,
           "token_count": 350,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 factor is 1/\u221a2 \u2248 0.707; writes 1/\u221a2 or decreases by \u221a2; shows T \u221d G^(-1/2)"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6910,9 +6206,9 @@
           "mean_entropy": 0.3900578790869553,
           "std_entropy": 0.5093557746998673,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete stability analysis"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 does not incorrectly say stable; uses stability analysis | \u2717 concludes orbits are unstable"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6926,7 +6222,7 @@
           "token_count": 350,
           "causal_accuracy": 0.0,
           "reasoning_type": "wrong",
-          "judge_justification": "Incorrect derivation, failed to apply increased force to radius scaling"
+          "judge_justification": "\u2717 radii shrink by factor 10; uses Bohr radius or fine-structure; states radii decrease"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6938,9 +6234,9 @@
           "mean_entropy": 0.28466402210268343,
           "std_entropy": 0.4249036220483011,
           "token_count": 350,
-          "causal_accuracy": 0.0,
-          "reasoning_type": "wrong",
-          "judge_justification": "Incorrect application of exponentiation"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 uses \u221a(g_E/g_P) correctly; cites pendulum period formula | \u2717 ratio \u22481.628"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6952,9 +6248,9 @@
           "mean_entropy": 0.35856977309178484,
           "std_entropy": 0.4949095917932106,
           "token_count": 350,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation of Q and \u03c90 from first principles"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 \u03c9 increases by \u221a3; Q decreases by 1/\u221a3; \u03c9\u2080 increases"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6966,9 +6262,9 @@
           "mean_entropy": 0.30122528514166447,
           "std_entropy": 0.4437383111320873,
           "token_count": 350,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 v \u221d r^(-3/4); exponent magnitude 0.75; uses mv\u00b2/r = F"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6980,9 +6276,9 @@
           "mean_entropy": 0.38627512037460887,
           "std_entropy": 0.5086683707274945,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete calculation"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 E \u221d \u03b1\u00b2 argument; references the 0.1\u00d7 \u03b1 factor | \u2717 ratio = 0.01 = (0.1)\u00b2"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -6994,9 +6290,9 @@
           "mean_entropy": 0.27288012667456996,
           "std_entropy": 0.4288294756217531,
           "token_count": 350,
-          "causal_accuracy": 0.8,
+          "causal_accuracy": 0.75,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation of Christoffel symbols from metric"
+          "judge_justification": "\u2713 Christoffels vanish at origin; writes Christoffel symbols explicitly | \u2717 geodesic reduces to zero at origin"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -7010,7 +6306,7 @@
           "token_count": 350,
           "causal_accuracy": 0.6,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation attempted, but incomplete"
+          "judge_justification": "\u2713 carries the +0.5 through derivation; derives equation of state | \u2717 identifies intermediate statistics; uses sum/polylogarithm form"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -7022,9 +6318,9 @@
           "mean_entropy": 0.3093664922774839,
           "std_entropy": 0.4779254719238124,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 \u03c9 \u221d k\u2074 dispersion; notes purely diffusive / no wave propagation; writes dispersion relation explicitly"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -7036,9 +6332,9 @@
           "mean_entropy": 0.20236539339870713,
           "std_entropy": 0.3829558796086356,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete simplification"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 carries E^0.7 through entropy formula | \u2717 notes higher entropy vs standard; derives S = ln Z + \u03b2<E^\u03b3> form"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-8B-Instruct",
@@ -7050,9 +6346,9 @@
           "mean_entropy": 0.3712335145952646,
           "std_entropy": 0.5406494041405582,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 identifies ultrahyperbolic equation; notes two timelike dimensions; discusses causality breakdown; notes Maxwell form-invariance"
         }
       ],
       "entropy_trajectories": {
@@ -12801,16 +12097,16 @@
           9.745098501371175e-05
         ]
       },
-      "verdict": "Llama-3.1-8B (HuggingFace): DECOUPLED \u2713  [H range=0.028 nats, acc range=0.17]"
+      "verdict": "Llama-3.1-8B (HuggingFace): ENTROPY FLAT / ACCURACY DROP NOT SIG (n=6 \u2014 low power)  [H range=0.028 nats, acc range=0.47]"
     },
     "huggingface/meta-llama/Llama-3.1-70B-Instruct": {
       "category_stats": {
         "KEPLER": {
           "mean_entropy": 0.09127536875960325,
           "std_entropy": 0.02465989405671218,
-          "mean_accuracy": 0.9833333333333334,
-          "std_accuracy": 0.03726779962499649,
-          "landauer_efficiency": 10.773260592605112,
+          "mean_accuracy": 0.8888333333333334,
+          "std_accuracy": 0.24857622349872666,
+          "landauer_efficiency": 9.737931989892044,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -12819,22 +12115,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.9649508530950139
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.6675988787587072,
-            "KEPLER_vs_NEWTON_OOD": 0.0002821048135146984,
-            "NEWTON_vs_NEWTON_OOD": 0.008895091083807077
+            "KEPLER_vs_NEWTON": 0.2588091894005257,
+            "KEPLER_vs_NEWTON_OOD": 0.4290766953593096,
+            "NEWTON_vs_NEWTON_OOD": 0.6680334513620579
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.25819888974716193,
-            "KEPLER_vs_NEWTON_OOD": 3.222516933177449,
-            "NEWTON_vs_NEWTON_OOD": 1.9518001458970664
+            "KEPLER_vs_NEWTON": 0.691568479272578,
+            "KEPLER_vs_NEWTON_OOD": 0.5065424580769377,
+            "NEWTON_vs_NEWTON_OOD": -0.2656087890207658
           }
         },
         "NEWTON": {
           "mean_entropy": 0.10276117281290464,
           "std_entropy": 0.035674204793924955,
-          "mean_accuracy": 0.9666666666666667,
-          "std_accuracy": 0.07453559924999298,
-          "landauer_efficiency": 9.40692520536583,
+          "mean_accuracy": 0.6916666666666665,
+          "std_accuracy": 0.27144162458170557,
+          "landauer_efficiency": 6.73081717280486,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -12843,22 +12139,22 @@
             "NEWTON_vs_NEWTON_OOD": 0.9649508530950139
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.6675988787587072,
-            "KEPLER_vs_NEWTON_OOD": 0.0002821048135146984,
-            "NEWTON_vs_NEWTON_OOD": 0.008895091083807077
+            "KEPLER_vs_NEWTON": 0.2588091894005257,
+            "KEPLER_vs_NEWTON_OOD": 0.4290766953593096,
+            "NEWTON_vs_NEWTON_OOD": 0.6680334513620579
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.25819888974716193,
-            "KEPLER_vs_NEWTON_OOD": 3.222516933177449,
-            "NEWTON_vs_NEWTON_OOD": 1.9518001458970664
+            "KEPLER_vs_NEWTON": 0.691568479272578,
+            "KEPLER_vs_NEWTON_OOD": 0.5065424580769377,
+            "NEWTON_vs_NEWTON_OOD": -0.2656087890207658
           }
         },
         "NEWTON_OOD": {
           "mean_entropy": 0.10168067852010447,
           "std_entropy": 0.040014270255562236,
-          "mean_accuracy": 0.8333333333333334,
-          "std_accuracy": 0.04714045207910316,
-          "landauer_efficiency": 8.19559178264694,
+          "mean_accuracy": 0.5083333333333333,
+          "std_accuracy": 0.38774633747106135,
+          "landauer_efficiency": 4.999310987414632,
           "n_entropy": 6,
           "n_accuracy": 6,
           "entropy_pvals": {
@@ -12867,14 +12163,14 @@
             "NEWTON_vs_NEWTON_OOD": 0.9649508530950139
           },
           "accuracy_pvals": {
-            "KEPLER_vs_NEWTON": 0.6675988787587072,
-            "KEPLER_vs_NEWTON_OOD": 0.0002821048135146984,
-            "NEWTON_vs_NEWTON_OOD": 0.008895091083807077
+            "KEPLER_vs_NEWTON": 0.2588091894005257,
+            "KEPLER_vs_NEWTON_OOD": 0.4290766953593096,
+            "NEWTON_vs_NEWTON_OOD": 0.6680334513620579
           },
           "cohens_d_acc": {
-            "KEPLER_vs_NEWTON": 0.25819888974716193,
-            "KEPLER_vs_NEWTON_OOD": 3.222516933177449,
-            "NEWTON_vs_NEWTON_OOD": 1.9518001458970664
+            "KEPLER_vs_NEWTON": 0.691568479272578,
+            "KEPLER_vs_NEWTON_OOD": 0.5065424580769377,
+            "NEWTON_vs_NEWTON_OOD": -0.2656087890207658
           }
         }
       },
@@ -12891,7 +12187,7 @@
           "token_count": 254,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
+          "judge_justification": "\u2713 states \u2248365.25 days; mentions orbital period"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12904,8 +12200,8 @@
           "std_entropy": 0.23879855849697637,
           "token_count": 48,
           "causal_accuracy": 1.0,
-          "reasoning_type": "heuristic",
-          "judge_justification": "Correct value, but no derivation"
+          "reasoning_type": "causal",
+          "judge_justification": "\u2713 states G \u2248 6.674\u00d710\u207b\u00b9\u00b9; gives correct SI units N\u00b7m\u00b2/kg\u00b2"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12919,7 +12215,7 @@
           "token_count": 242,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using gravitational constant and Earth's mass and radius."
+          "judge_justification": "\u2713 states \u224811.2 km/s; gives km/s units"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12931,9 +12227,9 @@
           "mean_entropy": 0.09240566467895053,
           "std_entropy": 0.21859943744185378,
           "token_count": 187,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.333,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 explains the proportionality | \u2717 writes T\u00b2\u221da\u00b3"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12947,7 +12243,7 @@
           "token_count": 266,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
+          "judge_justification": "\u2713 states \u2248687 days; or \u22481.88 years"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12959,9 +12255,9 @@
           "mean_entropy": 0.12982122933176318,
           "std_entropy": 0.2578941347599717,
           "token_count": 350,
-          "causal_accuracy": 0.9,
+          "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
+          "judge_justification": "\u2713 states 5.2 AU; states 11.86 years"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12973,9 +12269,9 @@
           "mean_entropy": 0.12135674498814604,
           "std_entropy": 0.2671401500501573,
           "token_count": 292,
-          "causal_accuracy": 1.0,
+          "causal_accuracy": 0.8,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from Kepler's third law"
+          "judge_justification": "\u2713 factor is 1/\u221a2 \u2248 0.707; writes 1/\u221a2 or decreases by \u221a2 | \u2717 shows T \u221d G^(-1/2)"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -12987,9 +12283,9 @@
           "mean_entropy": 0.16027339688853742,
           "std_entropy": 0.297479311951853,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete stability analysis"
+          "causal_accuracy": 0.25,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2713 uses stability analysis | \u2717 concludes orbits are unstable; does not incorrectly say stable"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13003,7 +12299,7 @@
           "token_count": 350,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles using Bohr model"
+          "judge_justification": "\u2713 radii shrink by factor 10; uses Bohr radius or fine-structure; states radii decrease"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13015,9 +12311,9 @@
           "mean_entropy": 0.07241294229962106,
           "std_entropy": 0.19019735626562143,
           "token_count": 350,
-          "causal_accuracy": 1.0,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 uses \u221a(g_E/g_P) correctly; cites pendulum period formula | \u2717 ratio \u22481.628"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13031,7 +12327,7 @@
           "token_count": 350,
           "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "judge_justification": "\u2713 \u03c9 increases by \u221a3; Q decreases by 1/\u221a3; \u03c9\u2080 increases"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13043,9 +12339,9 @@
           "mean_entropy": 0.1161196145095681,
           "std_entropy": 0.2829399724516576,
           "token_count": 299,
-          "causal_accuracy": 1.0,
+          "causal_accuracy": 0.6,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "judge_justification": "\u2713 exponent magnitude 0.75; uses mv\u00b2/r = F | \u2717 v \u221d r^(-3/4)"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13057,9 +12353,9 @@
           "mean_entropy": 0.10236825912010435,
           "std_entropy": 0.25342833389714614,
           "token_count": 350,
-          "causal_accuracy": 0.9,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "causal_accuracy": 0.5,
+          "reasoning_type": "heuristic",
+          "judge_justification": "\u2713 E \u221d \u03b1\u00b2 argument; references the 0.1\u00d7 \u03b1 factor | \u2717 ratio = 0.01 = (0.1)\u00b2"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13071,9 +12367,9 @@
           "mean_entropy": 0.10137877163602321,
           "std_entropy": 0.25809801466042714,
           "token_count": 350,
-          "causal_accuracy": 0.8,
+          "causal_accuracy": 1.0,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation provided, but incomplete"
+          "judge_justification": "\u2713 Christoffels vanish at origin; geodesic reduces to zero at origin; writes Christoffel symbols explicitly"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13087,7 +12383,7 @@
           "token_count": 350,
           "causal_accuracy": 0.8,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation started, but incomplete"
+          "judge_justification": "\u2713 carries the +0.5 through derivation; derives equation of state; uses sum/polylogarithm form | \u2717 identifies intermediate statistics"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13099,9 +12395,9 @@
           "mean_entropy": 0.11131952308720884,
           "std_entropy": 0.23941677803175943,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, but incomplete dispersion relation"
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 \u03c9 \u221d k\u2074 dispersion; notes purely diffusive / no wave propagation; writes dispersion relation explicitly"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13113,9 +12409,9 @@
           "mean_entropy": 0.045825542628447895,
           "std_entropy": 0.1547888819297373,
           "token_count": 350,
-          "causal_accuracy": 0.9,
+          "causal_accuracy": 0.75,
           "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles"
+          "judge_justification": "\u2713 carries E^0.7 through entropy formula; derives S = ln Z + \u03b2<E^\u03b3> form | \u2717 notes higher entropy vs standard"
         },
         {
           "model_id": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
@@ -13127,9 +12423,9 @@
           "mean_entropy": 0.07290768717630132,
           "std_entropy": 0.211845308042093,
           "token_count": 350,
-          "causal_accuracy": 0.8,
-          "reasoning_type": "causal",
-          "judge_justification": "Derivation from first principles, examining metric tensor and Maxwell's equations."
+          "causal_accuracy": 0.0,
+          "reasoning_type": "wrong",
+          "judge_justification": "\u2717 identifies ultrahyperbolic equation; notes two timelike dimensions; discusses causality breakdown; notes Maxwell form-invariance"
         }
       ],
       "entropy_trajectories": {
@@ -18608,7 +17904,7 @@
           1.640248744080947e-08
         ]
       },
-      "verdict": "Llama-3.1-70B (HuggingFace): DECOUPLED \u2713  [H range=0.011 nats, acc range=0.15]"
+      "verdict": "Llama-3.1-70B (HuggingFace): ENTROPY FLAT / ACCURACY DROP NOT SIG (n=6 \u2014 low power)  [H range=0.011 nats, acc range=0.38]"
     }
   },
   "cross_model": {
@@ -18617,16 +17913,6 @@
         "KEPLER": 0.3393115643133038,
         "NEWTON": 0.3609831672897896,
         "NEWTON_OOD": 0.3569897792663182
-      },
-      "mistral/mistral-small": {
-        "KEPLER": NaN,
-        "NEWTON": NaN,
-        "NEWTON_OOD": NaN
-      },
-      "groq/llama3-70b-8192": {
-        "KEPLER": NaN,
-        "NEWTON": NaN,
-        "NEWTON_OOD": NaN
       },
       "huggingface/meta-llama/Llama-3.1-8B-Instruct": {
         "KEPLER": 0.3597484973139866,
@@ -18641,29 +17927,19 @@
     },
     "accuracy_by_model_category": {
       "ollama/llama3.2:3b": {
-        "KEPLER": 0.7999999999999999,
-        "NEWTON": 0.8833333333333334,
-        "NEWTON_OOD": 0.6
-      },
-      "mistral/mistral-small": {
-        "KEPLER": 0.9500000000000001,
-        "NEWTON": 0.9833333333333334,
-        "NEWTON_OOD": 0.8333333333333334
-      },
-      "groq/llama3-70b-8192": {
-        "KEPLER": 0.9983333333333334,
-        "NEWTON": 0.9500000000000001,
-        "NEWTON_OOD": 0.8333333333333334
+        "KEPLER": 0.6665,
+        "NEWTON": 0.25833333333333336,
+        "NEWTON_OOD": 0.3833333333333333
       },
       "huggingface/meta-llama/Llama-3.1-8B-Instruct": {
-        "KEPLER": 0.6483333333333333,
-        "NEWTON": 0.6,
-        "NEWTON_OOD": 0.7666666666666666
+        "KEPLER": 0.6388333333333334,
+        "NEWTON": 0.16666666666666666,
+        "NEWTON_OOD": 0.39166666666666666
       },
       "huggingface/meta-llama/Llama-3.1-70B-Instruct": {
-        "KEPLER": 0.9833333333333334,
-        "NEWTON": 0.9666666666666667,
-        "NEWTON_OOD": 0.8333333333333334
+        "KEPLER": 0.8888333333333334,
+        "NEWTON": 0.6916666666666665,
+        "NEWTON_OOD": 0.5083333333333333
       }
     },
     "entropy_variance_by_category": {
@@ -18672,14 +17948,12 @@
       "NEWTON_OOD": 0.013202544854344548
     },
     "accuracy_variance_by_category": {
-      "KEPLER": 0.01791400000000001,
-      "NEWTON": 0.020288888888888898,
-      "NEWTON_OOD": 0.008177777777777782
+      "KEPLER": 0.012521950617283952,
+      "NEWTON": 0.052422839506172804,
+      "NEWTON_OOD": 0.0032561728395061724
     },
     "within_model_entropy_flatness": {
       "ollama/llama3.2:3b": 0.021671602976485793,
-      "mistral/mistral-small": NaN,
-      "groq/llama3-70b-8192": NaN,
       "huggingface/meta-llama/Llama-3.1-8B-Instruct": 0.027824774174733058,
       "huggingface/meta-llama/Llama-3.1-70B-Instruct": 0.011485804053301393
     },

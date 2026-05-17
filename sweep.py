@@ -91,13 +91,6 @@ MODELS = [
         "model":       "meta-llama/Llama-3.1-70B-Instruct",
         "key_env":     "HF_API_KEY",
     },
-    {
-        "id":          "huggingface/Qwen/Qwen2.5-72B-Instruct",
-        "label":       "Qwen2.5-72B\n(HuggingFace)",
-        "provider":    "huggingface",
-        "model":       "Qwen/Qwen2.5-72B-Instruct",
-        "key_env":     "HF_API_KEY",
-    },
 ]
 
 # ─────────────────────── task suite (hardcoded) ───────────────────────────────
