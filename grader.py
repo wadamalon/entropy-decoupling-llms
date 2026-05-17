@@ -1,312 +1,285 @@
 #!/usr/bin/env python3
 """
-grader.py — Programmatic ground-truth verifier for all 18 sweep tasks.
+grader.py — Strict binary ground-truth verifier for all 18 sweep tasks.
 
-Each task maps to a Checker: a list of required conditions (regex / numeric
-tolerance / keyword) that must ALL pass for full credit.  Partial credit is
-awarded proportionally (fraction of conditions met).
+Scoring: 1.0 = correct, 0.0 = wrong. No partial credit.
+A confident hallucination that sounds plausible is a hallucination.
+If the final answer is not present (cut off, wrong, or hedged) → 0.
 
-Usage (standalone):
-    python3 grader.py sweep_results.json
+Usage:
+    python3 grader.py [sweep_results.json]
 
-Exported symbol used by sweep.py:
+Exported symbol:
     grade(category, task_idx, response_text) -> {"accuracy": float,
                                                   "reasoning_type": str,
                                                   "justification": str}
 """
 
-import re, math, json, sys
-from typing import Callable
+import re, json, sys
 
 
-# ─────────────────────── primitive matchers ──────────────────────────────────
+# ─────────────────────── primitives ──────────────────────────────────────────
 
 def _norm(text: str) -> str:
-    """Lower-case, collapse whitespace, remove markdown."""
     text = text.lower()
     text = re.sub(r"[*_`#]", "", text)
     text = re.sub(r"\s+", " ", text)
     return text
 
 
-def num(value: float, tol: float = 0.05):
-    """
-    Match if any number in text is within tol (relative) of value.
-    Handles: plain floats, 1.23e-4, 1.23E-4,
-             '1.23 × 10^-4', '1.23×10^-4', '1.23·10^-4', '1.23 * 10^-4'.
-    """
-    def _candidates(text: str):
-        # Standard scientific notation (6.67e-11)
-        for m in re.finditer(r"-?\d+\.?\d*[eE][+-]?\d+", text):
-            try:
-                yield float(m.group())
-            except ValueError:
-                pass
-        # Explicit × 10^N  (6.67 × 10^-11  or  6.67×10^-11)
-        for m in re.finditer(
-            r"(-?\d+\.?\d*)\s*[×x·\*]\s*10\s*\^?\s*([+-]?\d+)", text
-        ):
-            try:
-                yield float(m.group(1)) * 10 ** float(m.group(2))
-            except ValueError:
-                pass
-        # Plain floats / integers (last, so they don't shadow sci-notation)
-        for m in re.finditer(r"-?\d+\.?\d*", text):
-            try:
-                yield float(m.group())
-            except ValueError:
-                pass
-
-    def check(text: str) -> bool:
-        for v in _candidates(text):
-            if value == 0:
-                if abs(v) < 1e-9:
-                    return True
-            elif abs(v - value) / abs(value) <= tol:
-                return True
-        return False
-
-    check.__doc__ = f"numeric≈{value}±{int(tol*100)}%"
-    return check
+def _nums(text: str):
+    """Yield every number in text, including X×10^Y and Xe±Y notation."""
+    # explicit sci: 6.67e-11 or 6.67E-11
+    for m in re.finditer(r"-?\d+\.?\d*[eE][+-]?\d+", text):
+        try: yield float(m.group())
+        except: pass
+    # written sci: 6.67 × 10^-11 or 6.67*10^-11 or 6.67·10^-11
+    for m in re.finditer(r"(-?\d+\.?\d*)\s*[×x·*]\s*10\s*\^?\s*([+-]?\d+)", text):
+        try: yield float(m.group(1)) * 10 ** float(m.group(2))
+        except: pass
+    # plain floats / ints (last to avoid shadowing above)
+    for m in re.finditer(r"-?\d+\.?\d*", text):
+        try: yield float(m.group())
+        except: pass
 
 
-def kw(*words, require_all: bool = True):
-    """Match if all (or any) of the keywords appear in normalised text."""
-    def check(text: str) -> bool:
-        t = _norm(text)
-        hits = [w.lower() in t for w in words]
-        return all(hits) if require_all else any(hits)
-    check.__doc__ = ("all" if require_all else "any") + " of " + str(words)
-    return check
+def has_num(text, value, tol=0.04):
+    """True if any number in text is within tol (relative) of value."""
+    nums = list(_nums(text))
+    for v in nums:
+        if value == 0:
+            if abs(v) < 1e-9: return True
+        elif abs(v - value) / abs(value) <= tol:
+            return True
+    return False
 
 
-def pat(pattern: str):
-    """Match if regex pattern appears in normalised text."""
-    def check(text: str) -> bool:
-        return bool(re.search(pattern, _norm(text)))
-    check.__doc__ = f"pattern:{pattern}"
-    return check
+def has_pat(text, pattern):
+    return bool(re.search(pattern, _norm(text)))
 
 
-def NOT(cond: Callable) -> Callable:
-    """Invert a condition (used to penalise common wrong answers)."""
-    def check(text: str) -> bool:
-        return not cond(text)
-    check.__doc__ = f"NOT({cond.__doc__})"
-    return check
+def has_kw(text, *words):
+    t = _norm(text)
+    return all(w.lower() in t for w in words)
 
 
-# ─────────────────────── ground truth table ──────────────────────────────────
-# Each entry: list of (condition_fn, weight, description)
-# Final score = sum(weight where condition passes) / sum(all weights)
-# weight=1 → required; weight=0.5 → supporting evidence
-
-GT: dict[tuple[str, int], list[tuple[Callable, float, str]]] = {}
-
-# ── KEPLER ───────────────────────────────────────────────────────────────────
-
-# K1: Orbital period of Earth ≈ 365.25 days
-GT[("KEPLER", 1)] = [
-    (num(365.25, tol=0.01),  1.0, "states ≈365.25 days"),
-    (kw("kepler", "orbital period", require_all=False), 0.5, "mentions orbital period"),
-]
-
-# K2: G ≈ 6.674×10⁻¹¹ N·m²/kg²
-GT[("KEPLER", 2)] = [
-    (num(6.674e-11, tol=0.02), 1.0, "states G ≈ 6.674×10⁻¹¹"),
-    (pat(r"n[·\s]?m.{0,4}kg"),           0.5, "gives correct SI units N·m²/kg²"),
-]
-
-# K3: Earth escape velocity ≈ 11.2 km/s
-GT[("KEPLER", 3)] = [
-    (num(11.2, tol=0.02),                       1.0, "states ≈11.2 km/s"),
-    (kw("km/s", "km s", require_all=False),     0.5, "gives km/s units"),
-]
-
-# K4: Kepler's third law T² ∝ a³
-GT[("KEPLER", 4)] = [
-    (pat(r"t.{0,3}[²2].{0,6}a.{0,3}[³3]"),  1.0, "writes T²∝a³"),
-    (kw("proportional", "cube", "square", require_all=False), 0.5, "explains the proportionality"),
-]
-
-# K5: Orbital period of Mars ≈ 687 days (1.881 years)
-GT[("KEPLER", 5)] = [
-    (num(687, tol=0.015),   1.0, "states ≈687 days"),
-    (num(1.881, tol=0.02),  0.5, "or ≈1.88 years"),
-]
-
-# K6: Jupiter at 5.2 AU, period 11.86 years
-GT[("KEPLER", 6)] = [
-    (num(5.2,   tol=0.02), 1.0, "states 5.2 AU"),
-    (num(11.86, tol=0.02), 1.0, "states 11.86 years"),
-]
-
-# ── NEWTON ───────────────────────────────────────────────────────────────────
-
-# N1: G doubles → period changes by factor 1/√2 ≈ 0.7071
-# T = 2π√(r³/GM), so T ∝ 1/√G → new T = T_old/√2
-GT[("NEWTON", 1)] = [
-    (num(0.7071, tol=0.02),                                         1.0, "factor is 1/√2 ≈ 0.707"),
-    (pat(r"1\s*[/÷]\s*[√\u221a]\s*2|1\s*/\s*sqrt\s*\(?\s*2|t.{0,5}decreas.{0,15}factor.{0,10}[√\u221a]?2"),
-                                                                    1.0, "writes 1/√2 or decreases by √2"),
-    (pat(r"t\s*[∝∼~∼]\s*.{0,10}[gG].{0,5}[-−]?0?\.5|t.{0,10}1\s*/\s*[√\u221a]?\s*g"),
-                                                                    0.5, "shows T ∝ G^(-1/2)"),
-]
-
-# N2: F ∝ r⁻³ → circular orbits are UNSTABLE
-GT[("NEWTON", 2)] = [
-    (kw("unstable"),                      1.0, "concludes orbits are unstable"),
-    (NOT(kw("stable", require_all=True)), 0.5, "does not incorrectly say stable"),
-    (pat(r"effective.{0,20}potential|perturbation|stability"), 0.5, "uses stability analysis"),
-]
-
-# N3: EM force 10× stronger → atomic radii scale by 1/10 (Bohr radius a₀ ∝ 1/e² ∝ 1/α)
-GT[("NEWTON", 3)] = [
-    (pat(r"1/10|0\.1.{0,10}(radii|radius|smaller)|factor.{0,10}10"), 1.0, "radii shrink by factor 10"),
-    (pat(r"bohr|a.{0,3}0|α|fine.{0,10}struct"),                      0.5, "uses Bohr radius or fine-structure"),
-    (kw("smaller", "decrease", "reduce", require_all=False),          0.5, "states radii decrease"),
-]
-
-# N4: Period ratio T_planet/T_Earth = √(g_Earth/g_planet) = √(9.81/3.7) ≈ 1.628
-GT[("NEWTON", 4)] = [
-    (num(1.628, tol=0.015),                    1.0, "ratio ≈1.628"),
-    (pat(r"sqrt.{0,10}9\.8|√.{0,10}9\.8"),    0.5, "uses √(g_E/g_P) correctly"),
-    (pat(r"t\s*[=∝]\s*2\s*π.{0,10}l.{0,5}g"), 0.5, "cites pendulum period formula"),
-]
-
-# N5: Triple b and k → Q multiplied by 1/√3 ≈ 0.577; ω₀ multiplied by √3 ≈ 1.732
-# Q = √(km)/b → Q_new = √(3k·m)/(3b) = Q/√3
-# ω₀ = √(k/m) → ω_new = √(3k/m) = √3·ω₀
-GT[("NEWTON", 5)] = [
-    (pat(r"[√\u221a]\s*3|sqrt.{0,5}3|1\.73"),       1.0, "ω increases by √3"),
-    (pat(r"1\s*/\s*[√\u221a]\s*3|q.{0,20}decreas|0\.577|q.{0,10}[√\u221a]\s*3"), 1.0, "Q decreases by 1/√3"),
-    (pat(r"ω.{0,20}[√\u221a]\s*3|resonan.{0,20}[√\u221a]\s*3|frequen.{0,20}increas"), 0.5, "ω₀ increases"),
-]
-
-# N6: F ∝ r⁻²·⁵ → v_orbital ∝ r^(-3/4)
-# From mv²/r = F = k·r⁻²·⁵ → v² ∝ r⁻¹·⁵ → v ∝ r^(-3/4)
-GT[("NEWTON", 6)] = [
-    (pat(r"r\s*\^?\s*\(?\s*-\s*3\s*/\s*4|r\s*\^?\s*-\s*0?\.75|v\s*[∝~]\s*r.{0,10}-3/4"), 1.0, "v ∝ r^(-3/4)"),
-    (num(0.75, tol=0.02),        1.0, "exponent magnitude 0.75"),
-    (pat(r"v.{0,5}[²2].{0,15}r.{0,10}=.{0,10}f|mv.{0,5}[²2].{0,10}/\s*r|centripetal"), 0.5, "uses mv²/r = F"),
-]
-
-# ── NEWTON_OOD ───────────────────────────────────────────────────────────────
-
-# O1: Modified hydrogen energy ratio
-# E ∝ α² (only depends on fine-structure constant α, not ħ independently)
-# E_new/E_old = (α_new)² / (α_old)² = (0.1)² = 0.01
-GT[("NEWTON_OOD", 1)] = [
-    (num(0.01, tol=0.01),                          1.0, "ratio = 0.01 = (0.1)²"),
-    (pat(r"α\s*[²2]|alpha.{0,5}square|fine.{0,10}struct"), 0.5, "E ∝ α² argument"),
-    (kw("0.1", require_all=True),                  0.5, "references the 0.1× α factor"),
-]
-
-# O2: Geodesic in 5D metric g_ij = δ_ij + 0.3·x_i·x_j
-# Christoffel symbols Γ vanish at the origin (x=0) because ∂g=0 there
-# → geodesic equation linearises to d²x^μ/dτ² = 0 (straight line) at zeroth order
-GT[("NEWTON_OOD", 2)] = [
-    (kw("vanish", "zero", "christoffel", require_all=False), 1.0, "Christoffels vanish at origin"),
-    (pat(r"d.{0,3}2.{0,5}x|geodesic.{0,30}straight|∂.{0,5}g.{0,10}0"), 0.5, "geodesic reduces to zero at origin"),
-    (pat(r"christoffel|γ.{0,10}=.{0,5}0|Γ"),                            0.5, "writes Christoffel symbols explicitly"),
-]
-
-# O3: Modified statistics n_i = 1/(exp(β(E-μ))+0.5)
-# Key result: EOS differs from both FD and BE; the +0.5 factor shifts the
-# effective fugacity. Acceptable answers: identifies it as intermediate/anyonic
-# statistics, or derives P·V = N·kT·f(z) with modified polylogarithm.
-GT[("NEWTON_OOD", 3)] = [
-    (pat(r"intermediate|anyonic|between.{0,20}fermi|between.{0,20}bose"), 0.5, "identifies intermediate statistics"),
-    (pat(r"\+\s*0\.5|plus.{0,5}half"),                                    1.0, "carries the +0.5 through derivation"),
-    (pat(r"equation.{0,10}state|pv|p\s*v|pressure"),                      0.5, "derives equation of state"),
-    (pat(r"polylog|li_|li\s*\(|sum.{0,20}exp"),                          0.5, "uses sum/polylogarithm form"),
-]
-
-# O4: Biharmonic Navier-Stokes → dispersion relation ω ∝ k⁴ (diffusive, no propagation)
-# Linearise: ∂v/∂t = -μ∇⁴v/ρ → ω = -iμk⁴/ρ (purely imaginary = purely damped)
-GT[("NEWTON_OOD", 4)] = [
-    (pat(r"k\s*[\^*]{1,2}\s*4|k4|quartic"),         1.0, "ω ∝ k⁴ dispersion"),
-    (pat(r"imaginary|damped|no.{0,15}propagat|evanescent"), 0.5, "notes purely diffusive / no wave propagation"),
-    (pat(r"ω\s*=.{0,10}[ik]|omega.{0,15}k.{0,5}4"),        0.5, "writes dispersion relation explicitly"),
-]
-
-# O5: Modified Boltzmann P(i) ∝ exp(-β·E_i^0.7)
-# S = ln Z + β·<E^0.7> (vs standard S = ln Z + β·<E>)
-# Key: entropy is higher for same β (less peaked distribution)
-GT[("NEWTON_OOD", 5)] = [
-    (pat(r"0\.7.{0,20}(exponent|power)|e.{0,5}0\.7"),   1.0, "carries E^0.7 through entropy formula"),
-    (pat(r"higher|greater|larger|more.{0,10}entrop"),     0.5, "notes higher entropy vs standard"),
-    (pat(r"s\s*=\s*ln|entropy.{0,30}beta|<e"),           0.5, "derives S = ln Z + β<E^γ> form"),
-]
-
-# O6: Metric (-,-,+,+) — two time dimensions
-# Key results: Maxwell equations form-invariant (∂_μF^μν = J^ν unchanged),
-# wave equation becomes ultrahyperbolic (two time → acausal),
-# light cone structure changes, causality undefined in standard sense
-GT[("NEWTON_OOD", 6)] = [
-    (kw("ultrahyperbolic", require_all=True),                             1.0, "identifies ultrahyperbolic equation"),
-    (kw("two time", "two temporal", "both temporal", require_all=False),  0.5, "notes two timelike dimensions"),
-    (kw("causality", "causal", require_all=False),                        0.5, "discusses causality breakdown"),
-    (pat(r"maxwell.{0,30}(unchanged|invariant|same)|∂.{0,5}f"),          0.5, "notes Maxwell form-invariance"),
-]
+def has_any(text, *words):
+    t = _norm(text)
+    return any(w.lower() in t for w in words)
 
 
-# ─────────────────────── grading engine ──────────────────────────────────────
+# ─────────────────────── binary checkers ─────────────────────────────────────
+# Each returns (correct: bool, explanation: str)
+
+def _k1(r):
+    """Earth orbital period ≈ 365.25 days"""
+    ok = has_num(r, 365.25, tol=0.005) or has_num(r, 365.0, tol=0.005)
+    return ok, ("365.25 days stated" if ok else "wrong or missing period value")
+
+def _k2(r):
+    """G ≈ 6.674×10⁻¹¹ N·m²/kg²"""
+    ok = has_num(r, 6.674e-11, tol=0.02)
+    return ok, ("G value correct" if ok else f"wrong G — got hallucinated value (common: 6.67×10⁻¹¹ without exponent context or wrong order)")
+
+def _k3(r):
+    """Escape velocity ≈ 11.2 km/s. 14.0 km/s is a hallucination."""
+    ok = has_num(r, 11.2, tol=0.02)
+    bad = has_num(r, 14.0, tol=0.02)
+    if bad and not ok:
+        return False, "hallucination: states 14.0 km/s (arithmetic error in formula)"
+    return ok, ("11.2 km/s stated" if ok else "wrong escape velocity")
+
+def _k4(r):
+    """Kepler's third law: T² ∝ a³"""
+    ok = has_pat(r, r"t.{0,3}[²2].{0,8}a.{0,3}[³3]") or \
+         has_pat(r, r"t\^2.{0,8}a\^3") or \
+         has_pat(r, r"square.{0,20}period.{0,30}cube.{0,20}(axis|radius|distance)")
+    return ok, ("T²∝a³ stated" if ok else "T²∝a³ not found")
+
+def _k5(r):
+    """Mars orbital period ≈ 687 days"""
+    ok = has_num(r, 687, tol=0.015) or has_num(r, 1.881, tol=0.02)
+    bad = has_num(r, 1.37, tol=0.03)   # common hallucination
+    if bad and not ok:
+        return False, "hallucination: states ~1.37 days (forgot unit conversion)"
+    return ok, ("687 days or 1.88 yr stated" if ok else "wrong Mars period")
+
+def _k6(r):
+    """Jupiter: 5.2 AU and 11.86 years — both required"""
+    au = has_num(r, 5.2, tol=0.02)
+    yr = has_num(r, 11.86, tol=0.02)
+    ok = au and yr
+    if not au: return False, "missing Jupiter distance (5.2 AU)"
+    if not yr: return False, "missing Jupiter period (11.86 yr)"
+    return True, "5.2 AU and 11.86 yr both stated"
+
+def _n1(r):
+    """G doubles → period changes by factor 1/√2 ≈ 0.7071. Period DECREASES."""
+    # Must give the right factor
+    right_factor = has_num(r, 0.7071, tol=0.02) or \
+                   has_pat(r, r"1\s*/\s*[√\u221a]\s*2|1\s*/\s*sqrt\s*\(?\s*2") or \
+                   has_pat(r, r"factor.{0,20}(1/[√\u221a]2|0\.707|[√\u221a]2\s*smaller)")
+    # Must not claim period increases (wrong direction)
+    wrong_dir = has_pat(r, r"period.{0,20}(increase|larger|longer|greater).{0,30}factor") and \
+                not has_pat(r, r"period.{0,20}decreas")
+    if wrong_dir:
+        return False, "hallucination: states period increases (wrong direction)"
+    return right_factor, ("1/√2 factor stated" if right_factor else
+                          "factor 1/√2 not reached (cut off or wrong)")
+
+def _n2(r):
+    """F∝r⁻³ → circular orbits UNSTABLE. No partial credit for 'maybe' or cut-off."""
+    unstable = has_any(r, "unstable", "not stable", "no stable")
+    stable   = has_kw(r, "stable") and not has_any(r, "unstable", "not stable", "no stable")
+    if stable:
+        return False, "hallucination: concludes orbits are stable (wrong)"
+    return unstable, ("correctly identifies instability" if unstable else
+                      "never reaches stability conclusion (cut off or wrong)")
+
+def _n3(r):
+    """EM force 10× → atomic radii shrink by factor 10. a₀ ∝ 1/e² ∝ 1/α."""
+    shrink_10 = has_pat(r, r"(1/10|factor.{0,10}10.{0,20}small|radii?.{0,20}(1/10|0\.1|ten.{0,10}small|decreas.{0,15}10))") or \
+                (has_num(r, 0.1, tol=0.02) and has_any(r, "radius", "radii", "bohr", "a0", "a₀"))
+    wrong_sqrt = has_pat(r, r"1/[√\u221a]10|0\.316|factor.{0,10}[√\u221a]10")
+    if wrong_sqrt:
+        return False, "hallucination: states 1/√10 (wrong — should be 1/10)"
+    return shrink_10, ("factor 1/10 correctly stated" if shrink_10 else
+                       "factor 1/10 not reached or wrong")
+
+def _n4(r):
+    """Pendulum period ratio T_planet/T_earth = √(g_E/g_P) = √(9.81/3.7) ≈ 1.628"""
+    # Accept either form of the ratio
+    right = has_num(r, 1.628, tol=0.02) or has_num(r, 1.627, tol=0.02) or \
+            has_num(r, 0.6145, tol=0.02) or has_num(r, 0.615, tol=0.02)
+    return right, ("correct ratio stated (≈1.628 or ≈0.6145)" if right else
+                   "correct ratio not reached")
+
+def _n5(r):
+    """Q=5, triple b and k: ω₀'=√3·ω₀ AND Q decreases (Q'=Q/√3≈2.89).
+    Q unchanged is wrong. Q=5/3 is wrong (wrong formula)."""
+    omega_right = has_pat(r, r"[√\u221a]\s*3.{0,20}(omega|ω|freq)|omega.{0,30}[√\u221a]\s*3") or \
+                  has_num(r, 1.732, tol=0.02)
+    q_decreases = has_any(r, "q decreases", "q reduces", "q becomes smaller",
+                          "q/√3", "q/sqrt(3)", "q is reduced") or \
+                  has_num(r, 2.89, tol=0.04) or has_num(r, 0.577, tol=0.03)
+    q_unchanged = has_pat(r, r"q.{0,20}(unchanged|remains.{0,10}same|stays.{0,10}same|does not change|constant)")
+    q_wrong_val = has_num(r, 1.667, tol=0.03)  # 5/3, from wrong Q formula
+    if q_unchanged:
+        return False, "Q stated as unchanged — wrong (correct is Q decreases by 1/√3)"
+    if q_wrong_val and not q_decreases:
+        return False, "hallucination: Q=5/3 — used wrong Q formula (Q=ω₀/b)"
+    ok = omega_right and q_decreases
+    if not omega_right: return False, "ω₀'=√3·ω₀ not stated"
+    if not q_decreases: return False, "Q decrease not stated (or stated Q unchanged)"
+    return True, "ω₀'=√3·ω₀ and Q decreases both stated"
+
+def _n6(r):
+    """F∝r⁻²·⁵ → v ∝ r^(-3/4). All three models agree on this."""
+    ok = has_pat(r, r"r\s*\^?\s*\(?\s*-\s*3\s*/\s*4|r\s*\^?\s*-\s*0?\.75") or \
+         has_num(r, 0.75, tol=0.02) or \
+         has_pat(r, r"v.{0,10}r.{0,6}-3/4|v\s*[∝~]\s*r.{0,8}3.{0,4}4")
+    return ok, ("v∝r^(-3/4) stated" if ok else "v∝r^(-3/4) not reached")
+
+def _o1(r):
+    """Modified H energy: E'/E = (α'/α)² = (0.1)² = 0.01"""
+    ok = has_num(r, 0.01, tol=0.05) or \
+         has_pat(r, r"\(0\.1\).{0,5}2|\(0\.1\)\^2|alpha.{0,5}square.{0,20}0\.1|0\.01")
+    # Common wrong: uses ħ directly without reducing to α form → wrong ratio
+    wrong = has_num(r, 7.3, tol=0.02) and not ok  # fixating on ħ factor
+    if wrong:
+        return False, "hallucination: fixates on 7.3× ħ instead of deriving via α²"
+    return ok, ("ratio=0.01=(0.1)² stated" if ok else "ratio 0.01 not reached")
+
+def _o2(r):
+    """Geodesic at origin: Christoffel symbols vanish → d²x/ds²=0"""
+    ok = has_any(r, "vanish at the origin", "zero at the origin",
+                 "christoffel symbols are zero", "γ = 0 at",
+                 "vanish at origin", "γ^i_jk = 0", "reduce to d²x") or \
+         has_pat(r, r"christoffel.{0,30}(vanish|zero|0).{0,20}origin") or \
+         has_pat(r, r"(vanish|zero|0).{0,30}christoffel.{0,30}origin") or \
+         has_pat(r, r"d.?2.{0,3}x.{0,10}(ds|dτ|dtau).{0,5}2.{0,10}=.{0,5}0")
+    return ok, ("Christoffel=0 at origin or d²x/ds²=0 stated" if ok else
+                "key result at origin not reached (cut off)")
+
+def _o3(r):
+    """Modified statistics: distribution with +0.5 interpolates FD (+1) and BE (−1).
+    Must carry +0.5 through to an EOS or identify its nature explicitly."""
+    carries = has_pat(r, r"\+\s*0\.5.{0,100}(equation|state|pressure|volume|pv|eos)") or \
+              has_pat(r, r"(equation|state|pressure|pv).{0,200}\+\s*0\.5")
+    identifies = has_any(r, "intermediate statistics", "between fermi",
+                         "between bose", "anyonic", "neither fermi nor bose",
+                         "interpolat")
+    ok = carries or identifies
+    return ok, ("correctly characterises modified statistics" if ok else
+                "does not identify nature of +0.5 distribution or cuts off early")
+
+def _o4(r):
+    """Biharmonic NS → dispersion ω = −iμk⁴/ρ (purely dissipative, quartic)"""
+    ok = has_pat(r, r"k\s*[\^*]{1,2}\s*4|k4|quartic|ω.{0,20}k.{0,4}4|omega.{0,20}k.{0,4}4") or \
+         has_pat(r, r"iω\s*=|i\s*omega\s*=.{0,20}k.{0,4}4")
+    # Common wrong: ω = ck (acoustic, ignores biharmonic)
+    wrong = has_pat(r, r"ω\s*=\s*[ck]\s*k|c_s\s*k|sound.{0,20}wave.{0,10}propagat") and not ok
+    if wrong:
+        return False, "hallucination: derives standard acoustic dispersion ω=ck, ignores biharmonic"
+    return ok, ("ω∝k⁴ dispersion stated" if ok else "k⁴ dispersion not reached")
+
+def _o5(r):
+    """Entropy S = β·⟨E^0.7⟩ + ln Z, vs standard S = β⟨E⟩ + ln Z"""
+    ok = has_pat(r, r"(beta|β).{0,20}(e.{0,5}0\.7|e\^0\.7|e\^{0\.7}|energy.{0,10}0\.7)") or \
+         has_pat(r, r"<e.{0,5}0\.7>|<e\^0\.7>|e_i.{0,5}0\.7.{0,50}(entropy|s\s*=)") or \
+         has_pat(r, r"s\s*=.{0,50}0\.7")
+    return ok, ("S=β⟨E^0.7⟩+lnZ form stated" if ok else
+                "E^0.7 not carried through to entropy expression")
+
+def _o6(r):
+    """Metric (−,−,+,+): F_μν form unchanged; x-index component sign flips.
+    Key: identifies two timelike dims or ultrahyperbolic or causality breakdown."""
+    ok = has_any(r, "ultrahyperbolic", "two time", "two temporal",
+                 "both temporal", "two timelike", "second time") or \
+         has_pat(r, r"causality.{0,30}(break|undefined|lost|violat|fails)") or \
+         has_pat(r, r"f_\{?[01]\}?.{0,5}[01].{0,20}(unchanged|same|invariant)")
+    return ok, ("two-time structure or causality breakdown identified" if ok else
+                "key physical consequences not reached (cut off or wrong)")
+
+
+# ─────────────────────── dispatch table ──────────────────────────────────────
+
+_CHECKERS = {
+    ("KEPLER",     1): _k1,
+    ("KEPLER",     2): _k2,
+    ("KEPLER",     3): _k3,
+    ("KEPLER",     4): _k4,
+    ("KEPLER",     5): _k5,
+    ("KEPLER",     6): _k6,
+    ("NEWTON",     1): _n1,
+    ("NEWTON",     2): _n2,
+    ("NEWTON",     3): _n3,
+    ("NEWTON",     4): _n4,
+    ("NEWTON",     5): _n5,
+    ("NEWTON",     6): _n6,
+    ("NEWTON_OOD", 1): _o1,
+    ("NEWTON_OOD", 2): _o2,
+    ("NEWTON_OOD", 3): _o3,
+    ("NEWTON_OOD", 4): _o4,
+    ("NEWTON_OOD", 5): _o5,
+    ("NEWTON_OOD", 6): _o6,
+}
+
 
 def grade(category: str, task_idx: int, response_text: str) -> dict:
     """
-    Score a response against ground truth for (category, task_idx).
-    Returns {"accuracy": float, "reasoning_type": str, "justification": str}.
-
-    accuracy is the weighted fraction of conditions met (0.0–1.0).
-    reasoning_type is "causal" if accuracy >= 0.6, "heuristic" if 0.3–0.6,
-    "wrong" if < 0.3.
+    Binary grade: 1.0 = correct, 0.0 = wrong/hallucination/cut-off.
     """
     key = (category, task_idx)
-    if key not in GT:
-        return {
-            "accuracy": 0.5,
-            "reasoning_type": "heuristic",
-            "justification": f"[grader] no rubric for {category} task {task_idx}",
-        }
-
-    conditions = GT[key]
-    total_weight = sum(w for _, w, _ in conditions)
-    earned       = 0.0
-    passed       = []
-    failed       = []
-
-    for cond_fn, weight, desc in conditions:
-        try:
-            hit = cond_fn(response_text)
-        except Exception:
-            hit = False
-        if hit:
-            earned += weight
-            passed.append(desc)
-        else:
-            failed.append(desc)
-
-    accuracy = earned / total_weight if total_weight > 0 else 0.0
-
-    if accuracy >= 0.6:
-        rtype = "causal"
-    elif accuracy >= 0.3:
-        rtype = "heuristic"
-    else:
-        rtype = "wrong"
-
-    parts = []
-    if passed:
-        parts.append("✓ " + "; ".join(passed))
-    if failed:
-        parts.append("✗ " + "; ".join(failed))
-    justification = " | ".join(parts)[:300]
-
+    checker = _CHECKERS.get(key)
+    if checker is None:
+        return {"accuracy": 0.0, "reasoning_type": "wrong",
+                "justification": f"no rubric for {key}"}
+    correct, explanation = checker(response_text)
     return {
-        "accuracy":       round(accuracy, 3),
-        "reasoning_type": rtype,
-        "justification":  justification,
+        "accuracy":       1.0 if correct else 0.0,
+        "reasoning_type": "causal" if correct else "wrong",
+        "justification":  explanation,
     }
 
 
@@ -323,27 +296,45 @@ def review_json(path: str):
         print(f"\n{'═'*72}")
         print(f"  MODEL: {model_id}")
         print(f"{'═'*72}")
+
+        per_cat = {c: [] for c in CATS}
         for r in result["raw_results"]:
-            cat = r["category"]
-            idx = r["task_index"]
-            resp = r.get("response", "")
-            verdict = grade(cat, idx, resp)
-            orig_acc = r.get("causal_accuracy", "?")
-            icon = "✓" if verdict["accuracy"] >= 0.6 else ("~" if verdict["accuracy"] >= 0.3 else "✗")
-            print(f"\n  [{cat[0]}{idx}] {icon} programmatic={verdict['accuracy']:.2f}  llm={orig_acc}")
+            cat   = r["category"]
+            idx   = r["task_index"]
+            resp  = r.get("response", "")
+            v     = grade(cat, idx, resp)
+            icon  = "✓" if v["accuracy"] == 1.0 else "✗"
             cat_tasks = tasks.get(cat, [])
             q = cat_tasks[idx-1] if idx-1 < len(cat_tasks) else ""
-            print(f"  Q: {str(q)[:100]}")
-            print(f"  A: {resp[:250].replace(chr(10),' ')}")
-            print(f"  Rubric: {verdict['justification']}")
+            print(f"\n  [{cat[0]}{idx}] {icon}  {v['justification']}")
+            print(f"       Q: {str(q)[:90]}")
+            print(f"       A: {resp[:200].replace(chr(10),' ')}")
+            per_cat[cat].append(v["accuracy"])
 
-        # per-model programmatic accuracy
+        print()
         for cat in CATS:
-            cat_recs = [r for r in result["raw_results"] if r["category"] == cat]
-            scores = [grade(r["category"], r["task_index"], r.get("response",""))["accuracy"]
-                      for r in cat_recs]
-            if scores:
-                print(f"  {cat}: programmatic_acc={sum(scores)/len(scores):.3f}  (n={len(scores)})")
+            scores = per_cat[cat]
+            n = len(scores)
+            correct = sum(scores)
+            print(f"  {cat:12s}: {int(correct)}/{n}  ({correct/n:.0%})")
+
+    # cross-model table
+    print("\n\n" + "═"*72)
+    print("  CROSS-MODEL ACCURACY (binary)")
+    print("═"*72)
+    print(f"  {'Model':<40} {'KEPLER':>8} {'NEWTON':>8} {'OOD':>8} {'TOTAL':>8}")
+    for model_id, result in data["results"].items():
+        scores = {c: [] for c in CATS}
+        for r in result["raw_results"]:
+            v = grade(r["category"], r["task_index"], r.get("response",""))
+            scores[r["category"]].append(v["accuracy"])
+        label = model_id.split("/")[-1][:38]
+        k = sum(scores["KEPLER"])/len(scores["KEPLER"]) if scores["KEPLER"] else 0
+        n = sum(scores["NEWTON"])/len(scores["NEWTON"]) if scores["NEWTON"] else 0
+        o = sum(scores["NEWTON_OOD"])/len(scores["NEWTON_OOD"]) if scores["NEWTON_OOD"] else 0
+        t = sum(scores["KEPLER"]+scores["NEWTON"]+scores["NEWTON_OOD"]) / \
+            len(scores["KEPLER"]+scores["NEWTON"]+scores["NEWTON_OOD"])
+        print(f"  {label:<40} {k:>7.0%} {n:>8.0%} {o:>8.0%} {t:>8.0%}")
 
 
 if __name__ == "__main__":
