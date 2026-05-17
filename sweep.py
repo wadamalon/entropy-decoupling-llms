@@ -41,13 +41,14 @@ _groq_mod        = _import("groq",             ["Groq"])
 _anthropic_mod   = _import("anthropic",        ["Anthropic"])
 # mistralai v2 puts Mistral in mistralai.client, not the top-level package
 _mistral_mod     = _import("mistralai.client", ["Mistral"]) or _import("mistralai", ["Mistral"])
+_hf_mod          = _import("huggingface_hub",  ["InferenceClient"])
 
 # ─────────────────────── configuration ───────────────────────────────────────
 
 TEMPERATURE   = 0.1
 MAX_TOKENS    = 350
 TOP_LOGPROBS  = 10
-API_DELAY     = {"ollama": 0.0, "mistral": 0.6, "groq": 2.0, "openai": 0.5}
+API_DELAY     = {"ollama": 0.0, "mistral": 0.6, "groq": 2.0, "openai": 0.5, "huggingface": 1.0}
 CACHE_PATH    = "sweep_cache.json"
 OUT_JSON      = "sweep_results.json"
 OUT_PNG       = "sweep_results.png"
@@ -89,6 +90,20 @@ MODELS = [
         "provider":    "openai",
         "model":       "gpt-4o-mini",
         "key_env":     "OPENAI_API_KEY",
+    },
+    {
+        "id":          "huggingface/meta-llama/Llama-3.1-8B-Instruct",
+        "label":       "Llama-3.1-8B\n(HuggingFace)",
+        "provider":    "huggingface",
+        "model":       "meta-llama/Llama-3.1-8B-Instruct",
+        "key_env":     "HF_API_KEY",
+    },
+    {
+        "id":          "huggingface/meta-llama/Llama-3.1-70B-Instruct",
+        "label":       "Llama-3.1-70B\n(HuggingFace)",
+        "provider":    "huggingface",
+        "model":       "meta-llama/Llama-3.1-70B-Instruct",
+        "key_env":     "HF_API_KEY",
     },
 ]
 
@@ -184,6 +199,8 @@ def get_client(provider, api_key):
     elif provider == "mistral" and _mistral_mod:
         MistralCls = getattr(_mistral_mod, "Mistral")
         client = MistralCls(api_key=api_key)
+    elif provider == "huggingface" and _hf_mod:
+        client = _hf_mod.InferenceClient(token=api_key)
     # ollama has no persistent client object
     _client_cache[provider] = client
     return client
@@ -333,6 +350,43 @@ def _gen_mistral(client, model_id, task):
     return text, lps
 
 
+def _gen_hf(client, model_id, task):
+    """
+    Generate via HuggingFace Inference API.
+    Uses chat_completion with logprobs=True (OpenAI-compatible response).
+    Falls back to no-logprobs if the model/plan doesn't support it.
+    """
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user",   "content": task},
+    ]
+    try:
+        resp = client.chat_completion(
+            messages=messages,
+            model=model_id,
+            max_tokens=MAX_TOKENS,
+            temperature=TEMPERATURE,
+            logprobs=True,
+            top_logprobs=TOP_LOGPROBS,
+        )
+        text = resp.choices[0].message.content or ""
+        lps  = _extract_openai_compat_logprobs(resp.choices[0].logprobs)
+        return text, lps
+    except Exception as e:
+        if "logprob" in str(e).lower() or "400" in str(e) or "not supported" in str(e).lower():
+            print(f"      [HF logprobs unsupported for {model_id}, retrying without]")
+        else:
+            raise
+    resp = client.chat_completion(
+        messages=messages,
+        model=model_id,
+        max_tokens=MAX_TOKENS,
+        temperature=TEMPERATURE,
+    )
+    text = resp.choices[0].message.content or ""
+    return text, []
+
+
 def generate(model_cfg, task):
     """
     Dispatch generation to the right provider.
@@ -351,6 +405,8 @@ def generate(model_cfg, task):
         return _gen_openai_compat(client, model_id, task)
     elif provider == "mistral":
         return _gen_mistral(client, model_id, task)
+    elif provider == "huggingface":
+        return _gen_hf(client, model_id, task)
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -906,6 +962,8 @@ def is_model_available(model_cfg):
         return _groq_mod is not None and bool(os.environ.get(key_env, ""))
     if provider == "mistral":
         return _mistral_mod is not None and bool(os.environ.get(key_env, ""))
+    if provider == "huggingface":
+        return _hf_mod is not None and bool(os.environ.get(key_env, ""))
     return False
 
 
