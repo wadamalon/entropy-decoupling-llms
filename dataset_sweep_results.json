@@ -1,0 +1,25 @@
+{
+  "openrouter/gpt-4o-mini": {
+    "model_id": "openrouter/gpt-4o-mini",
+    "model": "openai/gpt-4o-mini",
+    "n_per_category": 1000,
+    "category_stats": {
+      "EASY": {
+        "n": 1000,
+        "accuracy": 0.950,
+        "mean_entropy": 0.1724
+      },
+      "MEDIUM": {
+        "n": 1000,
+        "accuracy": 0.819,
+        "mean_entropy": 0.1670
+      },
+      "HARD": {
+        "n": 1000,
+        "accuracy": 0.618,
+        "mean_entropy": 0.1861
+      }
+    },
+    "notes": "EASY=GSM8K, MEDIUM=MATH Level 3, HARD=MATH Level 5. Entropy from top-5 logprobs via OpenRouter API."
+  }
+}
