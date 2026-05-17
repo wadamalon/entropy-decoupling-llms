@@ -71,20 +71,6 @@ MODELS = [
         "key_env":     None,
     },
     {
-        "id":          "mistral/mistral-small",
-        "label":       "mistral-small\n(Mistral API)",
-        "provider":    "mistral",
-        "model":       "mistral-small-latest",
-        "key_env":     "MISTRAL_API_KEY",
-    },
-    {
-        "id":          "groq/llama3-70b-8192",
-        "label":       "llama3-70b\n(Groq)",
-        "provider":    "groq",
-        "model":       "llama-3.3-70b-versatile",
-        "key_env":     "GROQ_API_KEY",
-    },
-    {
         "id":          "openai/gpt-4o-mini",
         "label":       "gpt-4o-mini\n(OpenAI)",
         "provider":    "openai",
@@ -103,6 +89,13 @@ MODELS = [
         "label":       "Llama-3.1-70B\n(HuggingFace)",
         "provider":    "huggingface",
         "model":       "meta-llama/Llama-3.1-70B-Instruct",
+        "key_env":     "HF_API_KEY",
+    },
+    {
+        "id":          "huggingface/Qwen/Qwen2.5-72B-Instruct",
+        "label":       "Qwen2.5-72B\n(HuggingFace)",
+        "provider":    "huggingface",
+        "model":       "Qwen/Qwen2.5-72B-Instruct",
         "key_env":     "HF_API_KEY",
     },
 ]
@@ -1010,18 +1003,10 @@ def run_model(model_cfg, cache):
                 if delay:
                     time.sleep(delay)
 
-            # ── judge ────────────────────────────────────────────────────────
-            cached_jdg = cache.get_judgement(cat, task_idx, text)
-            if cached_jdg:
-                print(f"    → cache hit (judge)")
-                jdg = cached_jdg
-            else:
-                print(f"    → judging...", end=" ", flush=True)
-                jdg = judge(task, text)
-                print(f"acc={jdg['accuracy']:.2f}  type={jdg['reasoning_type']}")
-                cache.set_judgement(cat, task_idx, text, jdg)
-                if delay:
-                    time.sleep(min(delay, 0.5))
+            # ── grade (programmatic ground-truth) ────────────────────────────
+            from grader import grade as _grade
+            jdg = _grade(cat, task_idx, text)
+            print(f"    → programmatic acc={jdg['accuracy']:.2f}  type={jdg['reasoning_type']}")
 
             valid_H_list = [h for h in entropy_traj if not math.isnan(h)]
             records.append({
@@ -1135,7 +1120,7 @@ def main():
     # ── overall conclusion ───────────────────────────────────────────────────
     print("\n" + "=" * 70)
     print("  OVERALL CONCLUSION")
-    print(f"  Judge used: {_judge_name or 'none'}")
+    print(f"  Scoring: programmatic ground-truth rubrics (grader.py)")
     print("=" * 70)
 
     decoupled_count = sum(
@@ -1206,5 +1191,59 @@ def main():
     print("\nDone.")
 
 
+def review(json_path=OUT_JSON):
+    """
+    Print every task response with its judge score and justification
+    for human review. Usage: python3 sweep.py --review
+    """
+    with open(json_path) as f:
+        data = json.load(f)
+
+    CAT_SYMBOLS = {"KEPLER": "K", "NEWTON": "N", "NEWTON_OOD": "O"}
+    PASS = "\033[32m✓\033[0m"
+    FAIL = "\033[31m✗\033[0m"
+    WARN = "\033[33m~\033[0m"
+
+    for model_id, result in data["results"].items():
+        print("\n" + "═" * 72)
+        print(f"  MODEL: {model_id}")
+        print("═" * 72)
+        for r in result["raw_results"]:
+            acc  = r.get("causal_accuracy", 0) or 0
+            rtype = r.get("reasoning_type", "?")
+            just  = r.get("judge_justification", "")
+            H     = r.get("mean_entropy")
+            cat   = r.get("category", "?")
+            idx   = r.get("task_index", "?")
+            q     = r.get("question", "")
+            resp  = r.get("response", "")
+
+            icon = PASS if acc >= 0.8 else (WARN if acc >= 0.4 else FAIL)
+            H_s  = f"H={H:.3f}" if H is not None else "H=n/a"
+
+            print(f"\n  [{CAT_SYMBOLS.get(cat,cat)}{idx}] {icon} acc={acc:.2f}  {H_s}  type={rtype}")
+            print(f"  Q: {q[:100]}")
+            print(f"  A: {resp[:300].replace(chr(10), ' ')}")
+            if len(resp) > 300:
+                print(f"     ... [{len(resp)} chars total]")
+            print(f"  Judge: {just}")
+
+        # per-model summary line
+        cs = result["category_stats"]
+        print(f"\n  Summary: " + "  ".join(
+            f"{c}: acc={cs[c]['mean_accuracy']:.2f}" for c in ["KEPLER","NEWTON","NEWTON_OOD"]
+            if cs.get(c) and cs[c].get("mean_accuracy") is not None
+        ))
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--review" in sys.argv:
+        path = OUT_JSON
+        for i, a in enumerate(sys.argv):
+            if a == "--review" and i + 1 < len(sys.argv):
+                path = sys.argv[i + 1]
+                break
+        review(path)
+    else:
+        main()
